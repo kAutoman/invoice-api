@@ -1,13 +1,13 @@
-const Part = {
-    saveItem : () => {
+const Custom = {
+    addCustom : () => {
         let data = $('#category_form').serialize();
         let mode = $('#hid_mode').val();
-        let url='';
+        let url;
         if (mode === 'add') {
-            url = '/insertParts';
+            url = '/insertCustomer';
         }
         else {
-            url = '/updateParts';
+            url = '/updateCustomer';
         }
         $.ajax({
             type: "POST",
@@ -26,12 +26,10 @@ const Part = {
             return 'no_id'
         }
         let record = $('#record_'+id).val();
+        console.log(record);
         let decoded = JSON.parse(record);
         $('#category_id').val(id);
-        $('#q').val(decoded.q);
-        $('#mq').val(decoded.mq);
-        $('#description').val(decoded.description);
-        $('#pnq').val(decoded.pnq);
+        $('#category_name').val(decoded.name);
         $('#hid_mode').val('edit');
         $('#categoryModal').modal('show');
     },
@@ -42,7 +40,7 @@ const Part = {
         if (!id) {
             return 'no_id';
         }
-        let url = '/deleteParts/'+id;
+        let url = '/deleteCategory/'+id;
         $.ajax({
             type: "GET",
             url,

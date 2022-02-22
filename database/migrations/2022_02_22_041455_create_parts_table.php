@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
-            $table->integer('q')->default(0);
-            $table->integer('mq')->default(0);
+            $table->text('q')->nullable();
+            $table->text('mq')->nullable();
             $table->text('description')->nullable();
-            $table->integer('pno')->default(0);
+            $table->text('pnq')->nullable();
             $table->integer('is_shopping')->default(0);
             $table->integer('type')->default(1);
             $table->timestamps();

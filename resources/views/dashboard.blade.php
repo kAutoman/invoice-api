@@ -41,7 +41,37 @@
             </table>
         </div>
     </div>
+    <!-- add Modal -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$is_shop ? 'Shopping List '.$type : 'Parts List '.$type}} Manage</h5>
+                    <a class="close" style="cursor: pointer" onclick="$('#categoryModal').modal('hide')" aria-label="Close">
+                        <i class="mdi mdi-close" id="fullscreen-button"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <form id="category_form">
+                            <input type="hidden" name="data[type]" id="hid_type" value="{{$type}}">
+                            <input type="hidden" name="data[is_shopping]" id="hid_is_shop" value="{{$is_shop}}">
+                            <input type="text" class="form-control form-control-md" name="data[q]" id="q" placeholder="Q">
+                            <input type="text" class="form-control form-control-md" name="data[mq]" id="mq" placeholder="MQ">
+                            <input type="text" class="form-control form-control-md" name="data[description]" id="description" placeholder="Description">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="PNQ">
+                            <input type="hidden" class="form-control form-control-md" name="id" id="category_id" value="0">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#categoryModal').modal('hide')">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="Part.saveItem()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
-    <script src="{{asset('assets/custom/dashboard.js')}}"></script>
+    <script src="{{asset('assets/custom/customers.js')}}"></script>
 @endsection

@@ -17,8 +17,8 @@ class PartsController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function index($type, $is_shopList, Request $request){
-        $results = PartsModel::get();
+    public function index($type, $is_shopList){
+        $results = PartsModel::where('type',$type)->where('is_shopping',$is_shopList)->get();
         return view('parts',[
             'results'=>$results,
             'type'=>$type,
@@ -26,11 +26,12 @@ class PartsController extends Controller
         ]);
     }
 
-    public function getItemList(Request $request){
-        return response()->json(CategoriesModel::get());
+    public function getItemList($type,$is_shopList){
+        $results = PartsModel::where('type',$type)->where('is_shopping',$is_shopList)->get();
+        return response()->json($results);
     }
 
-    public function updateItem(Request $request)
+    public function updatePart(Request $request)
     {
         $id = $request->get('id',0);
         if (empty($id)){
@@ -40,24 +41,24 @@ class PartsController extends Controller
         if (empty($record)){
             return response()->json('no_data',400);
         }
-        CategoriesModel::find($id)->update($record);
-        return response()->json(CategoriesModel::all());
+        PartsModel::find($id)->update($record);
+        return response()->json(PartsModel::all());
     }
 
-    public function deleteCategory($id) {
+    public function deletePart($id) {
         if (empty($id)){
             return response()->json('no_id',400);
         }
-        CategoriesModel::find($id)->delete();
+        PartsModel::find($id)->delete();
         return response()->json('success');
     }
 
-    public function createCategory(Request $request) {
+    public function createPart(Request $request) {
         $record = $request->get('data',[]);
         if (empty($record)){
             return response()->json('no_record',400);
         }
-        CategoriesModel::insert($record);
+        PartsModel::insert($record);
         return response()->json('success');
     }
 }

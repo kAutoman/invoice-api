@@ -46,9 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/categoryList',[CategoryController::class,'getItemList']);
 
     Route::get('/parts/{type}/{is_shop}',[PartsController::class,'index']);
-    Route::post('/insertParts/{type}/{is_shop}',[PartsController::class,'createCategory']);
-    Route::post('/updateParts/{type}/{is_shop}',[PartsController::class,'updateItem']);
-    Route::get('/deleteParts/{id}/{is_shop}',[PartsController::class,'deleteCategory']);
+    Route::post('/insertParts',[PartsController::class,'createPart']);
+    Route::post('/updateParts',[PartsController::class,'updatePart']);
+    Route::get('/deleteParts/{id}',[PartsController::class,'deletePart']);
     Route::get('/api/partsList/{type}/{is_shop}',[PartsController::class,'getItemList']);
 });
 

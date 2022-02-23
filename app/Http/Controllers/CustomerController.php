@@ -11,7 +11,7 @@ class CustomerController extends Controller
     public function index(Request $request){
         $categories = CategoriesModel::get();
         $results = CustomersModel::all();
-        return view('categories',['results'=>$results,'categories'=>$categories]);
+        return view('dashboard',['results'=>$results,'categories'=>$categories]);
     }
 
     public function getItemList(Request $request){

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PartsController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +38,7 @@ Route::any('/auth/logout',function (){
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard',function (){
-        return view('dashboard');
-    });
+    Route::get('/dashboard',[CustomerController::class,'index']);
     Route::get('/categories',[CategoryController::class,'index']);
     Route::post('/insertCategory',[CategoryController::class,'createCategory']);
     Route::post('/updateCategory',[CategoryController::class,'updateItem']);
@@ -49,7 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/insertParts',[PartsController::class,'createPart']);
     Route::post('/updateParts',[PartsController::class,'updatePart']);
     Route::get('/deleteParts/{id}',[PartsController::class,'deletePart']);
+    Route::any('/customer/attach_file',[FileController::class,'uploadCustomerAttach']);
     Route::get('/api/partsList/{type}/{is_shop}',[PartsController::class,'getItemList']);
+
+    Route::post('/insertInvoice',[\App\Http\Controllers\InvoiceController::class,'insertInvoice']);
 });
 
 

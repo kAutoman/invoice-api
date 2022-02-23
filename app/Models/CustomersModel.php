@@ -12,6 +12,18 @@ class CustomersModel extends Model
     public $table = 'customers';
 
     protected $fillable = [
-        'name'
+        'title',
+        'mobile_phone',
+        'email',
+        'name',
+        'address',
+        'town',
+        'postal_code',
+        'further_note',
+        'state',
+        'remind_date',
+        'category_id',
+        'attached_files',
+        'invoices_id',
     ];
 }

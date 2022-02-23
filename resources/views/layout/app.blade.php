@@ -128,7 +128,7 @@
 <script src="{{asset('assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{asset('assets/js/misc.js')}}"></script>
 <!-- endinject -->
-<!-- Custom js for this page -->
+<!-- Customers js for this page -->
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
 @yield('script')

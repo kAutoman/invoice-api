@@ -9,7 +9,7 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
-                    <button type="button" class="btn btn-sm btn-outline-behance"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                 </ul>
             </nav>
         </div>
@@ -46,7 +46,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{$is_shop ? 'Shopping List '.$type : 'Parts List '.$type}} Manage</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Customer Manage</h5>
                     <a class="close" style="cursor: pointer" onclick="$('#categoryModal').modal('hide')" aria-label="Close">
                         <i class="mdi mdi-close" id="fullscreen-button"></i>
                     </a>
@@ -54,13 +54,28 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <form id="category_form">
-                            <input type="hidden" name="data[type]" id="hid_type" value="{{$type}}">
-                            <input type="hidden" name="data[is_shopping]" id="hid_is_shop" value="{{$is_shop}}">
-                            <input type="text" class="form-control form-control-md" name="data[q]" id="q" placeholder="Q">
-                            <input type="text" class="form-control form-control-md" name="data[mq]" id="mq" placeholder="MQ">
-                            <input type="text" class="form-control form-control-md" name="data[description]" id="description" placeholder="Description">
-                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="PNQ">
-                            <input type="hidden" class="form-control form-control-md" name="id" id="category_id" value="0">
+                            <input type="text" class="form-control form-control-md" name="data[q]" id="q" placeholder="Title for tasks list...">
+                            <input type="text" class="form-control form-control-md" name="data[mq]" id="mq" placeholder="Mobile number">
+                            <input type="text" class="form-control form-control-md" name="data[description]" id="description" placeholder="Email">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Name">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Address">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Town">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Postal Code">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Date form created">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Date form updated">
+                            <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="Further note">
+                            <select name="data[state]" id="state" class="form-control-sm">
+                                <option value="">select state</option>
+                                <option value="1">active</option>
+                                <option value="2">completed</option>
+                                <option value="3">waiting</option>
+                            </select>
+                            <select name="data[category]" id="category" class="form-control-sm">
+                                <option value=''>select category</option>
+
+                            </select>
+                            <input type="hidden" class="form-control form-control-md" name="id" id="customer_id" value="0">
+
                         </form>
                     </div>
                 </div>

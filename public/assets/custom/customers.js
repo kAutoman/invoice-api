@@ -1,4 +1,4 @@
-const Custom = {
+const Customers = {
     addCustom : () => {
         let data = $('#category_form').serialize();
         let mode = $('#hid_mode').val();

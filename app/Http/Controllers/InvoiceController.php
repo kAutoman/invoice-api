@@ -14,7 +14,11 @@ class InvoiceController extends Controller
             return response()->json('no_data',400);
         }
 
-        DB::table('invoice')->insert($record);
-        return response()->json(DB::table('invoice')->get());
+        $id = DB::table('invoice')->insertGetId($record);
+        $result = [
+            'result'=>$record,
+            'id'=>$id
+        ];
+        return response()->json($result);
     }
 }

@@ -53,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/partsList/{type}/{is_shop}',[PartsController::class,'getItemList']);
 
     Route::post('/insertInvoice',[\App\Http\Controllers\InvoiceController::class,'insertInvoice']);
+    Route::post('/insertCustomer',[\App\Http\Controllers\CustomerController::class,'insertCustomer']);
+    Route::get('/deleteCustomer/{id}',[\App\Http\Controllers\CustomerController::class,'deleteCustomer']);
+    Route::get('/pdfExport/{id}',[\App\Http\Controllers\CustomerController::class,'pdfExport']);
 });
 
 

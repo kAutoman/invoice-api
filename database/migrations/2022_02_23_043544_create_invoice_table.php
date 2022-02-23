@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('payed_amount');
             $table->integer('due_total');
             $table->text('comment');
+            $table->integer('customer_id')->nullable();
             $table->timestamps();
         });
     }

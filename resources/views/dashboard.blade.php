@@ -26,17 +26,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-outline-success"><i class="mdi mdi-pencil menu-icon"></i></button>
-                        <button type="button" class="btn btn-sm btn-outline-danger"><i class="mdi mdi-trash-can menu-icon"></i></button>
-                    </td>
-                </tr>
+                    @if(count($results) > 0)
+                        @foreach($results as $key=>$result)
+                            <tr>
+                                <th scope="row">{{$key+1}}</th>
+                                <td>{{$result->email}}</td>
+                                <td>{{$result->mobile_phone}}</td>
+                                <td>{{$result->name}}</td>
+                                <td>{{$result->created_at}}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-outline-success"><i class="mdi mdi-pencil menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="Dashboard.pdfExport({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="6" class="text-center"> No Data</td>
+                        </tr>
+                    @endif
+
                 </tbody>
             </table>
         </div>
@@ -75,8 +85,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[postal_code]" id="postal_code" placeholder="Postal Code">
                             </div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[created_at]"  placeholder="Date form created"></div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[updated_at]"  placeholder="Date form updated"></div>
+                            <div class="form-group"><input type="datetime-local" class="form-control form-control-md" name="data[created_at]"  placeholder="Date form created"></div>
+                            <div class="form-group"><input type="datetime-local" class="form-control form-control-md" name="data[updated_at]"  placeholder="Date form updated"></div>
                             <div class="form-group">
                                 <input type="date" class="form-control form-control-md" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>
@@ -100,7 +110,7 @@
                                 </select>
                             </div>
 
-                            <input type="hidden" name="attached_files" id="hid_attached_files" value="[]">
+                            <input type="hidden" name="data[attached_files]" id="hid_attached_files" value="[]">
                             <input type="hidden" class="form-control form-control-md" name="id" id="customer_id" value="0">
                             <div class="form-group">
                                 <div class="dropzone dz-clickable" id="my-dropzone">
@@ -119,7 +129,7 @@
                                     </thead>
                                     <tbody id="invoice_body">
                                         <tr>
-                                            <td colspan="2" class="text-center">No Data</td>
+                                            <td colspan="2" class="text-center" id="invoice_nodata">No Data</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -130,7 +140,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#categoryModal').modal('hide')">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveItem()">Save Customer</button>
+                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveCustomer()">Save Customer</button>
                 </div>
             </div>
         </div>

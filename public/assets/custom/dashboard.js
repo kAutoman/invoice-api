@@ -56,12 +56,9 @@ const Dashboard = {
             url,
             data,
             success: (response)=> {
-                let html = '';
-                for(let invoice of response){
-                    html += '<tr><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"></i></th> <td><input type="hidden" name="data[invoiceIds]['+invoice.id+']" value="'+invoice.id+'">'+invoice.invoice_no+'</td></tr>';
-                }
-
-                $('#invoice_body').html(html);
+                let html = '<tr><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"></i></th> <td><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
+                $('#invoice_nodata').remove();
+                $('#invoice_body').append(html);
                 $('#invoiceModal').modal('hide');
                 $('#categoryModal').modal('show');
             },
@@ -79,20 +76,39 @@ const Dashboard = {
             url,
             data,
             success: (response)=> {
-                let html = '';
-                for(let invoice of response){
-                    html += '<tr><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"></i></th> <td><input type="hidden" name="data[invoiceIds]['+invoice.id+']" value="'+invoice.id+'">'+invoice.invoice_no+'</td></tr>';
-                }
-
-                $('#invoice_body').html(html);
-                $('#invoiceModal').modal('hide');
-                $('#categoryModal').modal('show');
+                location.reload();
             },
             error : (error) => {
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
             }
         });
     },
+    deleteCustomer : (id) => {
+        let url = '/deleteCustomer/'+id;
+        $.ajax({
+            type: "GET",
+            url,
+            success: (response)=> {
+                location.reload();
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
+    },
+    pdfExport : (id) => {
+        let url = '/pdfExport/'+id;
+        $.ajax({
+            type: "GET",
+            url,
+            success: (response)=> {
+                location.reload();
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
+    }
 }
 Dropzone.autoDiscover = false;
 $(document).ready(function(){

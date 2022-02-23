@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoriesModel;
 use App\Models\CustomersModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -14,38 +15,24 @@ class CustomerController extends Controller
         return view('dashboard',['results'=>$results,'categories'=>$categories]);
     }
 
-    public function getItemList(Request $request){
-        return response()->json(CategoriesModel::get());
-    }
-
-    public function updateItem(Request $request)
+    public function insertCustomer(Request $request)
     {
-        $id = $request->get('id',0);
-        if (empty($id)){
-            return response()->json('no_id',400);
-        }
         $record = $request->get('data',[]);
-        if (empty($record)){
-            return response()->json('no_data',400);
-        }
-        CategoriesModel::find($id)->update($record);
-        return response()->json(CategoriesModel::all());
-    }
-
-    public function deleteCategory($id) {
-        if (empty($id)){
-            return response()->json('no_id',400);
-        }
-        CategoriesModel::find($id)->delete();
+        $invoiceIds = $record['invoiceIds'];
+        unset($record['invoiceIds']);
+        $resultId = DB::table('customers')->insertGetId($record);
+        DB::table('invoice')->whereIn('id',$invoiceIds)->update(['customer_id'=>$resultId]);
         return response()->json('success');
     }
 
-    public function createCategory(Request $request) {
-        $record = $request->get('data',[]);
-        if (empty($record)){
-            return response()->json('no_record',400);
-        }
-        CategoriesModel::insert($record);
+    public function deleteCustomer($id)
+    {
+        DB::table('invoice')->where('customer_id',$id)->delete();
+        DB::table('customers')->find($id)->delete();
         return response()->json('success');
+    }
+
+    public function pdfExport($id){
+
     }
 }

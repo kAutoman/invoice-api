@@ -24,6 +24,5 @@ class CustomersModel extends Model
         'remind_date',
         'category_id',
         'attached_files',
-        'invoices_id',
     ];
 }

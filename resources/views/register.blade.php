@@ -36,9 +36,6 @@
                                 <input type="email" name="data[email]" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="UserEmail">
                             </div>
                             <div class="form-group">
-                                <input type="name" name="data[name]" class="form-control form-control-lg" placeholder="Username">
-                            </div>
-                            <div class="form-group">
                                 <input type="password" name="data[password]" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                             </div>
                             <div class="form-group">

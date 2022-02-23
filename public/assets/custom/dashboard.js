@@ -113,7 +113,10 @@ const Dashboard = {
 Dropzone.autoDiscover = false;
 $(document).ready(function(){
     $('#import_file_btn').change(function (){
-        $('#csv_form').submit();
+        $('#customer_form').submit();
+    });
+    $('#import_invoice_btn').change(function (){
+        $('#invoice_form').submit();
     });
     let originFile;
     $("#my-dropzone").dropzone({

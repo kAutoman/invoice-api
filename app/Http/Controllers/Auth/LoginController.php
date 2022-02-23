@@ -43,9 +43,6 @@ class LoginController extends Controller
         if (empty($input['password'])){
             return response()->json('password is required',400);
         }
-        if (empty($input['name'])){
-            return response()->json('name is required',400);
-        }
 
         if (empty($input['confirm_password'])){
             return response()->json('confirm password is required',400);

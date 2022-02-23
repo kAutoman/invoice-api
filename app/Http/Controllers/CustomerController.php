@@ -38,7 +38,7 @@ class CustomerController extends Controller
     }
 
     public function exportCustomers(Request $request){
-        $customers = DB::table('customers')->join('invoice','customers.id','invoice.customer_id')->get()->toArray();
+        $customers = DB::table('customers')->get()->toArray();
         $delimiter = ",";
         $filename = "customers_" . date('Y-m-d') . ".csv";
 
@@ -61,18 +61,6 @@ class CustomerController extends Controller
             'ATTACH_FILES',
             'CREATED_AT',
             'UPDATED_AT',
-            'INVOICE_NO',
-            'INVOICE_DATE',
-            'TO',
-            'FROM_ADDRESS',
-            'ITEMS',
-            'EXCLUDING_VAT',
-            'VAT_AMOUNT',
-            'INVOICE_TOTAL',
-            'PAYED_AMOUNT',
-            'DUE_TOTAL',
-            'COMMENT',
-            'CUSTOMER_ID',
         );
         fputcsv($f, $fields, $delimiter);
 
@@ -94,18 +82,71 @@ class CustomerController extends Controller
                 $customer->attached_files,
                 $customer->created_at,
                 $customer->updated_at,
-                $customer->invoice_no,
-                $customer->invoice_date,
-                $customer->to,
-                $customer->from_address,
-                $customer->items,
-                $customer->excluding_vat,
-                $customer->vat_amount,
-                $customer->invoice_total,
-                $customer->payed_amount,
-                $customer->due_total,
-                $customer->comment,
-                $customer->customer_id,
+            );
+            fputcsv($f, $lineData, $delimiter);
+        }
+
+        // Move back to beginning of file
+        fseek($f, 0);
+
+        // Set headers to download file rather than displayed
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        //output all remaining data on a file pointer
+        fpassthru($f);
+    }
+
+    public function exportInvoices(Request $request){
+
+        $invoices = DB::table('invoice')->get()->toArray();
+        $delimiter = ",";
+        $filename = "invoice_" . date('Y-m-d') . ".csv";
+
+        // Create a file pointer
+        $f = fopen('php://memory', 'w');
+        // Set column headers
+        $fields = array(
+            'INVOICE_ID',
+            'INVOICE_NO',
+            'EMAIL',
+            'INVOICE_DATE',
+            'MOBILE_NUM',
+            'TO',
+            'FROM_ADDRESS',
+            'ITEMS',
+            'EXCLUDING_VAT',
+            'VAT_AMOUNT',
+            'INVOICE_TOTAL',
+            'PAYED_AMOUNT',
+            'DUE_TOTAL',
+            'COMMENT',
+            'CUSTOMER_ID',
+            'CREATED_AT',
+            'UPDATED_AT'
+        );
+        fputcsv($f, $fields, $delimiter);
+
+        // Output each row of the data, format line as csv and write to file pointer
+        foreach ($invoices as $invoice){
+            $lineData = array(
+                $invoice->id,
+                $invoice->invoice_no,
+                $invoice->email,
+                $invoice->invoice_date,
+                $invoice->mobile_num,
+                $invoice->to,
+                $invoice->from_address,
+                $invoice->items,
+                $invoice->excluding_vat,
+                $invoice->vat_amount,
+                $invoice->invoice_total,
+                $invoice->payed_amount,
+                $invoice->due_total,
+                $invoice->comment,
+                $invoice->customer_id,
+                $invoice->created_at,
+                $invoice->updated_at,
             );
             fputcsv($f, $lineData, $delimiter);
         }
@@ -131,11 +172,13 @@ class CustomerController extends Controller
         // Skip the first line
         fgetcsv($csvFile);
 
+        $insertData = [];
         // Parse data from CSV file line by line
         while(($line = fgetcsv($csvFile)) !== FALSE){
             // Get row data
-            $name   = $line[0];
-            $email  = $line[1];
+            $temp = [];
+            $temp['title'] = $line[0];
+            $temp['mobile_phone'] = $line[1];
             $phone  = $line[2];
             $status = $line[3];
         }

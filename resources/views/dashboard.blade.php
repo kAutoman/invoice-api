@@ -10,11 +10,16 @@
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
-                    <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_customers')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export CSV</button>
-                    <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="csv_form">
+                    <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_customers')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Customer</button>
+                    <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_invoices')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export invoices</button>
+                    <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="customer_form">
                         <input type="file" id="import_file_btn" name="file" hidden>
                     </form>
-                    <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import CSV</button>
+                    <form action="{{url('/import_invoices')}}" method="post" enctype="multipart/form-data" id="invoice_form">
+                        <input type="file" id="import_invoice_btn" name="file" hidden>
+                    </form>
+                    <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Customer</button>
+                    <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_invoice_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Invoices</button>
                 </ul>
             </nav>
         </div>
@@ -42,7 +47,6 @@
                                 <td class="text-center">
                                     <button type="button" class="btn btn-sm btn-outline-success"><i class="mdi mdi-pencil menu-icon"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-danger" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="Dashboard.pdfExport({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
                                 </td>
                             </tr>
                         @endforeach

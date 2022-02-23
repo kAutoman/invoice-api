@@ -22,6 +22,12 @@ return new class extends Migration
             $table->text('address');
             $table->text('town');
             $table->text('postal_code');
+            $table->text('further_note');
+            $table->string('state');
+            $table->date('remind_date');
+            $table->integer('category_id');
+            $table->text('attached_files');
+            $table->text('invoices_id');
             $table->timestamps();
         });
     }

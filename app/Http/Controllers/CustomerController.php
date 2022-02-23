@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoriesModel;
+use App\Models\CustomersModel;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     public function index(Request $request){
-        $results = CategoriesModel::get();
-        return view('categories',['results'=>$results]);
+        $categories = CategoriesModel::get();
+        $results = CustomersModel::all();
+        return view('categories',['results'=>$results,'categories'=>$categories]);
     }
 
     public function getItemList(Request $request){

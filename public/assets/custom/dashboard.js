@@ -112,6 +112,9 @@ const Dashboard = {
 }
 Dropzone.autoDiscover = false;
 $(document).ready(function(){
+    $('#import_file_btn').change(function (){
+        $('#csv_form').submit();
+    });
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element

@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Adam Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
@@ -36,14 +36,13 @@
                 <span class="mdi mdi-menu"></span>
             </button>
             <ul class="navbar-nav navbar-nav-right">
-
                 <li class="nav-item d-none d-lg-block full-screen-link">
-                    <a class="nav-link">
+                    <a class="nav-link cursor-pointer">
                         <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                     </a>
                 </li>
                 <li class="nav-item nav-logout d-none d-lg-block">
-                    <a class="nav-link" href="javascript:Dashboard.actionLogout()">
+                    <a class="nav-link cursor-pointer" href="javascript:Dashboard.actionLogout()">
                         <i class="mdi mdi-power"></i>
                     </a>
                 </li>

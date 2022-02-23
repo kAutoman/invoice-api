@@ -19,6 +19,10 @@
     font-size: 3rem;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .dropzone .dz-message {
     color: rgba(0,0,0,.54);
     font-weight: 500;

@@ -58,5 +58,7 @@ const Part = {
     }
 }
 $(document).ready(function(){
-
+    $('#import_file_btn').change(function (){
+        $('#parts_form').submit();
+    });
 })

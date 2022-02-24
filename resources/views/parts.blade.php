@@ -10,6 +10,11 @@
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_parts')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Parts</button>
+                    <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Parts</button>
+                    <form action="{{url('/import_parts')}}" method="post" enctype="multipart/form-data" id="parts_form">
+                        <input type="file" id="import_file_btn" name="file" hidden>
+                    </form>
                 </ul>
             </nav>
         </div>

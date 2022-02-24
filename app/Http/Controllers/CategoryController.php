@@ -98,7 +98,7 @@ class CategoryController extends Controller
             // Get row data
             $temp = [];
             $temp['name'] = $line[0];
-            DB::table('invoice')->insert($temp);
+            DB::table('categories')->insert($temp);
         }
 
         // Close opened CSV file

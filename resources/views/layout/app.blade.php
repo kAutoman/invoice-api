@@ -134,6 +134,23 @@
 <!-- Customers js for this page -->
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
+<script>
+    let actionLogout = () =>  {
+        let url = '/auth/logout';
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: (response)=> {
+                if (response === 'success') {
+                    location.href='/';
+                }
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
+    },
+</script>
 @yield('script')
 <!-- End custom js for this page -->
 </body>

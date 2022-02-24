@@ -175,15 +175,76 @@ class CustomerController extends Controller
         $insertData = [];
         // Parse data from CSV file line by line
         while(($line = fgetcsv($csvFile)) !== FALSE){
+
             // Get row data
             $temp = [];
-            $temp['title'] = $line[0];
-            $temp['mobile_phone'] = $line[1];
-            $phone  = $line[2];
-            $status = $line[3];
+            $temp['title'] = $line[1];
+            $temp['mobile_phone'] = $line[2];
+            $temp['email']  = $line[3];
+            $temp['name'] = $line[4];
+            $temp['address'] = $line[5];
+            $temp['town'] = $line[6];
+            $temp['postal_code'] = $line[7];
+            $temp['further_note'] = $line[8];
+            $temp['state'] = $line[9];
+            $temp['remind_date'] = $line[10];
+            $temp['category_id'] = $line[11];
+            $temp['attached_files'] = $line[12];
+            $temp['created_at'] = $line[13];
+            $temp['updated_at'] = $line[14];
+            DB::table('customers')->insert($temp);
         }
 
         // Close opened CSV file
         fclose($csvFile);
+
+        return redirect()->to('/dashboard');
+
+    }
+
+    public function importInvoices(Request $request)
+    {
+        $csv = $request->file('file');
+        $realPath = $csv->getRealPath();
+        // Open uploaded CSV file with read-only mode
+        $csvFile = fopen($realPath, 'r');
+
+        // Skip the first line
+        fgetcsv($csvFile);
+
+        $insertData = [];
+        // Parse data from CSV file line by line
+        while(($line = fgetcsv($csvFile)) !== FALSE){
+
+            // Get row data
+            $temp = [];
+            $temp['invoice_no'] = $line[1];
+            $temp['email']  = $line[2];
+            $temp['invoice_date'] = $line[3];
+            $temp['mobile_num'] = $line[4];
+            $temp['to'] = $line[5];
+            $temp['from_address'] = $line[6];
+            $temp['items'] = $line[7];
+            $temp['excluding_vat'] = $line[8];
+            $temp['vat_amount'] = $line[9];
+            $temp['invoice_total'] = $line[10];
+            $temp['payed_amount'] = $line[11];
+            $temp['due_total'] = $line[12];
+            $temp['comment'] = $line[13];
+            $temp['customer_id'] = $line[14];
+            if (!empty($line[15])){
+                $temp['created_at'] = $line[15];
+            }
+            if (!empty($line[16])){
+                $temp['updated_at'] = $line[16];
+            }
+            DB::table('invoice')->insert($temp);
+        }
+
+        // Close opened CSV file
+        fclose($csvFile);
+
+        return redirect()->to('/dashboard');
+
     }
 }

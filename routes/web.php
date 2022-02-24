@@ -39,6 +39,7 @@ Route::any('/auth/logout',function (){
 
 Route::middleware(['auth'])->group(function () {
     Route::any('/dashboard',[CustomerController::class,'index']);
+    Route::any('/api/dashboard',[CustomerController::class,'index']);
     Route::get('/categories',[CategoryController::class,'index']);
     Route::post('/insertCategory',[CategoryController::class,'createCategory']);
     Route::post('/updateCategory',[CategoryController::class,'updateItem']);

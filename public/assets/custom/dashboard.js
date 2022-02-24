@@ -118,6 +118,9 @@ $(document).ready(function(){
     $('#import_invoice_btn').change(function (){
         $('#invoice_form').submit();
     });
+    $('#search_status').change(function (){
+        $('#search_form').submit();
+    });
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element

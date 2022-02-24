@@ -27,11 +27,12 @@
             <h3 class="page-title">
                 <div class="form-inline">
                     <form action="{{url('/dashboard')}}" method="post" id="search_form">
-                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer..." name="search[email]">
-                        <select name="search[status]" id="search_status" class="form-control ml-2">
-                            <option value="1">active</option>
-                            <option value="2">complete</option>
-                            <option value="3">waiting</option>
+                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer..." name="search[email]" value="{{$search['email']?? ''}}">
+                        <select name="search[state]" id="search_status" class="form-control ml-2">
+                            <option value="">select status</option>
+                            <option value="1" {{$search['state'] == '1' ? 'selected':''}}>active</option>
+                            <option value="2" {{$search['state'] == '2' ? 'selected':''}}>complete</option>
+                            <option value="3" {{$search['state'] == '3' ? 'selected':''}}>waiting</option>
                         </select>
                     </form>
                 </div>

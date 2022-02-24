@@ -10,9 +10,30 @@ use Illuminate\Support\Facades\DB;
 class CustomerController extends Controller
 {
     public function index(Request $request){
+        $search = $request->get('search',[]);
         $categories = CategoriesModel::get();
-        $results = CustomersModel::all();
-        return view('dashboard',['results'=>$results,'categories'=>$categories]);
+        $results = DB::table('customers');
+        if (!empty($search['email'])){
+            $results = $results->where('email','like',"%{$search['email']}%");
+        }
+        if (!empty($search['state'])){
+            $results = $results->where('state',"{$search['state']}");
+        }
+        $results = $results->get();
+        return view('dashboard',['results'=>$results,'categories'=>$categories,'search'=>$search]);
+    }
+
+    public function getCustomerList(Request $request){
+        $search = $request->get('search',[]);
+        $categories = CategoriesModel::get();
+        $results = DB::table('customers');
+        if (!empty($search['email'])){
+            $results = $results->where('email','like',"%{$search['email']}%");
+        }
+        if (!empty($search['state'])){
+            $results = $results->where('state',"{$search['state']}");
+        }
+        return response()->json(['results'=>$results,'categories'=>$categories,'search'=>$search]);
     }
 
     public function insertCustomer(Request $request)

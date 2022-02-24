@@ -23,6 +23,25 @@
                 </ul>
             </nav>
         </div>
+        <div class="page-header">
+            <h3 class="page-title">
+                <div class="form-inline">
+                    <form action="{{url('/dashboard')}}" method="post" id="search_form">
+                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer..." name="search[email]">
+                        <select name="search[status]" id="search_status" class="form-control ml-2">
+                            <option value="1">active</option>
+                            <option value="2">complete</option>
+                            <option value="3">waiting</option>
+                        </select>
+                    </form>
+                </div>
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#search_form').submit()"><i class="mdi mdi-search-web menu-icon"></i>Search</button>
+                </ul>
+            </nav>
+        </div>
         <div class="row">
             <table class="table table-striped table-light">
                 <thead>

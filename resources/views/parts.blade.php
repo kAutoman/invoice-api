@@ -25,7 +25,7 @@
                     <th scope="col">Q</th>
                     <th scope="col">MQ</th>
                     <th scope="col" class="text-center">Description</th>
-                    <th scope="col" class="text-center">PNQ</th>
+                    <th scope="col" class="text-center">PNO</th>
                     <th scope="col" class="text-center">Control</th>
                 </tr>
                 </thead>
@@ -39,7 +39,7 @@
                             <th scope="row">{{$result->q}}</th>
                             <td>{{$result->mq}}</td>
                             <td>{{$result->description}}</td>
-                            <td>{{$result->pnq}}</td>
+                            <td>{{$result->pno}}</td>
                             <td class="text-center">
                                 <input type="hidden" id="record_{{$result->id}}" value='@json($result)'>
                                 <button type="button" class="btn btn-sm btn-outline-success" onclick="Part.editItem({{$result->id}})"><i class="mdi mdi-pencil menu-icon"></i></button>
@@ -79,7 +79,7 @@
                                     <input type="text" class="form-control form-control-md" name="data[q]" id="q" placeholder="Q">
                                     <input type="text" class="form-control form-control-md" name="data[mq]" id="mq" placeholder="MQ">
                                     <input type="text" class="form-control form-control-md" name="data[description]" id="description" placeholder="Description">
-                                    <input type="text" class="form-control form-control-md" name="data[pnq]" id="pnq" placeholder="PNQ">
+                                    <input type="text" class="form-control form-control-md" name="data[pno]" id="pno" placeholder="PNO">
                                     <input type="hidden" class="form-control form-control-md" name="id" id="category_id" value="0">
                                 </form>
                             </div>

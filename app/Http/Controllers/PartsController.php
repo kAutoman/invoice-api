@@ -76,7 +76,7 @@ class PartsController extends Controller
             'Q',
             'MQ',
             'DESCRIPTION',
-            'PNQ',
+            'PNO',
             'IS_SHOPPING',
             'TYPE',
             'CREATED_AT',
@@ -90,7 +90,7 @@ class PartsController extends Controller
                 $part->q,
                 $part->mq,
                 $part->description,
-                $part->pnq,
+                $part->pno,
                 $part->is_shopping,
                 $part->type,
                 $part->created_at,
@@ -129,7 +129,7 @@ class PartsController extends Controller
             $temp['q'] = $line[0];
             $temp['mq'] = $line[1];
             $temp['description'] = $line[2];
-            $temp['pnq'] = $line[3];
+            $temp['pno'] = $line[3];
             $temp['is_shopping'] = $line[4];
             $temp['type'] = $line[5];
             DB::table('parts')->insert($temp);

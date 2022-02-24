@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('q')->nullable();
             $table->text('mq')->nullable();
             $table->text('description')->nullable();
-            $table->text('pnq')->nullable();
+            $table->text('pno')->nullable();
             $table->integer('is_shopping')->default(0);
             $table->integer('type')->default(1);
             $table->timestamps();

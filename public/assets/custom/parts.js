@@ -31,7 +31,7 @@ const Part = {
         $('#q').val(decoded.q);
         $('#mq').val(decoded.mq);
         $('#description').val(decoded.description);
-        $('#pnq').val(decoded.pnq);
+        $('#pno').val(decoded.pno);
         $('#hid_mode').val('edit');
         $('#categoryModal').modal('show');
     },

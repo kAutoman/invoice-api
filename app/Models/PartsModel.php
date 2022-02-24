@@ -15,7 +15,7 @@ class PartsModel extends Model
         'q',
         'mq',
         'description',
-        'pnq',
+        'pno',
         'is_shopping',
         'type',
     ];

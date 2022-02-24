@@ -56,5 +56,7 @@ const Category = {
     }
 }
 $(document).ready(function(){
-
+    $('#import_file_btn').change(function (){
+        $('#categories_form').submit();
+    });
 })

@@ -57,9 +57,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/deleteCustomer/{id}',[\App\Http\Controllers\CustomerController::class,'deleteCustomer']);
     Route::get('/pdfExport/{id}',[\App\Http\Controllers\CustomerController::class,'pdfExport']);
     Route::get('/export_customers',[\App\Http\Controllers\CustomerController::class,'exportCustomers']);
+    Route::get('/export_categories',[\App\Http\Controllers\CategoryController::class,'exportCategories']);
     Route::get('/export_invoices',[\App\Http\Controllers\CustomerController::class,'exportInvoices']);
     Route::post('/import_customers',[\App\Http\Controllers\CustomerController::class,'importCustomers']);
     Route::post('/import_invoices',[\App\Http\Controllers\CustomerController::class,'importInvoices']);
+    Route::post('/import_categories',[\App\Http\Controllers\CategoryController::class,'importCategories']);
 
 });
 

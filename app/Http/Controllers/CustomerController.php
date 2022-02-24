@@ -97,6 +97,46 @@ class CustomerController extends Controller
         fpassthru($f);
     }
 
+    public function importCustomers(Request $request)
+    {
+        $csv = $request->file('file');
+        $realPath = $csv->getRealPath();
+        // Open uploaded CSV file with read-only mode
+        $csvFile = fopen($realPath, 'r');
+
+        // Skip the first line
+        fgetcsv($csvFile);
+
+        $insertData = [];
+        // Parse data from CSV file line by line
+        while(($line = fgetcsv($csvFile)) !== FALSE){
+
+            // Get row data
+            $temp = [];
+            $temp['title'] = $line[1];
+            $temp['mobile_phone'] = $line[2];
+            $temp['email']  = $line[3];
+            $temp['name'] = $line[4];
+            $temp['address'] = $line[5];
+            $temp['town'] = $line[6];
+            $temp['postal_code'] = $line[7];
+            $temp['further_note'] = $line[8];
+            $temp['state'] = $line[9];
+            $temp['remind_date'] = $line[10];
+            $temp['category_id'] = $line[11];
+            $temp['attached_files'] = $line[12];
+            $temp['created_at'] = $line[13];
+            $temp['updated_at'] = $line[14];
+            DB::table('customers')->insert($temp);
+        }
+
+        // Close opened CSV file
+        fclose($csvFile);
+
+        return redirect()->to('/dashboard');
+
+    }
+
     public function exportInvoices(Request $request){
 
         $invoices = DB::table('invoice')->get()->toArray();
@@ -160,46 +200,6 @@ class CustomerController extends Controller
 
         //output all remaining data on a file pointer
         fpassthru($f);
-    }
-
-    public function importCustomers(Request $request)
-    {
-        $csv = $request->file('file');
-        $realPath = $csv->getRealPath();
-        // Open uploaded CSV file with read-only mode
-        $csvFile = fopen($realPath, 'r');
-
-        // Skip the first line
-        fgetcsv($csvFile);
-
-        $insertData = [];
-        // Parse data from CSV file line by line
-        while(($line = fgetcsv($csvFile)) !== FALSE){
-
-            // Get row data
-            $temp = [];
-            $temp['title'] = $line[1];
-            $temp['mobile_phone'] = $line[2];
-            $temp['email']  = $line[3];
-            $temp['name'] = $line[4];
-            $temp['address'] = $line[5];
-            $temp['town'] = $line[6];
-            $temp['postal_code'] = $line[7];
-            $temp['further_note'] = $line[8];
-            $temp['state'] = $line[9];
-            $temp['remind_date'] = $line[10];
-            $temp['category_id'] = $line[11];
-            $temp['attached_files'] = $line[12];
-            $temp['created_at'] = $line[13];
-            $temp['updated_at'] = $line[14];
-            DB::table('customers')->insert($temp);
-        }
-
-        // Close opened CSV file
-        fclose($csvFile);
-
-        return redirect()->to('/dashboard');
-
     }
 
     public function importInvoices(Request $request)

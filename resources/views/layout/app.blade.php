@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item nav-logout d-none d-lg-block">
-                    <a class="nav-link cursor-pointer" href="javascript:Dashboard.actionLogout()">
+                    <a class="nav-link cursor-pointer" href="javascript:actionLogout()">
                         <i class="mdi mdi-power"></i>
                     </a>
                 </li>
@@ -135,7 +135,7 @@
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
 <script>
-    let actionLogout = () =>  {
+    const actionLogout = () =>  {
         let url = '/auth/logout';
         $.ajax({
             type: "POST",
@@ -149,7 +149,7 @@
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
             }
         });
-    },
+    }
 </script>
 @yield('script')
 <!-- End custom js for this page -->

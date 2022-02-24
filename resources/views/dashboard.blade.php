@@ -45,8 +45,9 @@
                                 <td>{{$result->name}}</td>
                                 <td>{{$result->created_at}}</td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-sm btn-outline-success"><i class="mdi mdi-pencil menu-icon"></i></button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-success" title="Edit"><i class="mdi mdi-pencil menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF"><i class="mdi mdi-file-pdf-outline menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
                                 </td>
                             </tr>
                         @endforeach

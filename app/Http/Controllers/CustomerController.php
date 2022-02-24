@@ -32,11 +32,6 @@ class CustomerController extends Controller
         return response()->json('success');
     }
 
-    public function pdfExport($id)
-    {
-
-    }
-
     public function exportCustomers(Request $request){
         $customers = DB::table('customers')->get()->toArray();
         $delimiter = ",";

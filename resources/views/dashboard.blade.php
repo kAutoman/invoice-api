@@ -27,7 +27,7 @@
             <h3 class="page-title">
                 <div class="form-inline">
                     <form action="{{url('/dashboard')}}" method="post" id="search_form">
-                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer" name="search[email]" value="{{$search['email']?? ''}}">
+                        <input type="text" class="form-control" id="search_customer" placeholder="Search Title" name="search[title]" value="{{$search['title']?? ''}}">
                         <select name="search[state]" id="search_status" class="form-control ml-2">
                             <option value="">select status</option>
                             <option value="1" {{!empty($search['state'])&&$search['state'] == '1' ? 'selected':''}}>active</option>
@@ -169,8 +169,8 @@
                                         </tr>
                                     </thead>
                                     <tbody id="invoice_body">
-                                        <tr>
-                                            <td colspan="2" class="text-center" id="invoice_nodata">No Data</td>
+                                        <tr id="invoice_nodata">
+                                            <td colspan="2" class="text-center" >No Data</td>
                                         </tr>
                                     </tbody>
                                 </table>

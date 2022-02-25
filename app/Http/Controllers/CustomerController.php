@@ -13,8 +13,8 @@ class CustomerController extends Controller
         $search = $request->get('search',[]);
         $categories = CategoriesModel::get();
         $results = DB::table('customers');
-        if (!empty($search['email'])){
-            $results = $results->where('email','like',"%{$search['email']}%");
+        if (!empty($search['title'])){
+            $results = $results->where('title','like',"%{$search['title']}%");
         }
         if (!empty($search['state'])){
             $results = $results->where('state',"{$search['state']}");

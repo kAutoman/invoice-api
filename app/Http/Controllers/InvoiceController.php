@@ -27,4 +27,9 @@ class InvoiceController extends Controller
     {
 
     }
+
+    public function deleteInvoice($id){
+        DB::table('invoice')->where('id',$id)->delete();
+        return response()->json('success');
+    }
 }

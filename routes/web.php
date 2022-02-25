@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/insertInvoice',[\App\Http\Controllers\InvoiceController::class,'insertInvoice']);
     Route::post('/insertCustomer',[\App\Http\Controllers\CustomerController::class,'insertCustomer']);
     Route::get('/deleteCustomer/{id}',[\App\Http\Controllers\CustomerController::class,'deleteCustomer']);
+    Route::get('/deleteInvoice/{id}',[\App\Http\Controllers\InvoiceController::class,'deleteInvoice']);
     Route::get('/pdfInvoiceExport/{id}',[\App\Http\Controllers\InvoiceController::class,'pdfInvoiceExport']);
     Route::get('/export_customers',[\App\Http\Controllers\CustomerController::class,'exportCustomers']);
     Route::get('/export_categories',[\App\Http\Controllers\CategoryController::class,'exportCategories']);

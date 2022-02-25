@@ -57,7 +57,7 @@ const Dashboard = {
             url,
             data,
             success: (response)=> {
-                let html = '<tr><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"></i></th> <td><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
+                let html = '<tr id="invoice_row_'+response.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+response.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
                 $('#invoice_nodata').remove();
                 $('#invoice_body').append(html);
                 $('#invoiceModal').modal('hide');
@@ -91,6 +91,22 @@ const Dashboard = {
             url,
             success: (response)=> {
                 location.reload();
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
+    },
+    deleteInvoice : (id) => {
+        let url = '/deleteInvoice/'+id;
+        $.ajax({
+            type: "GET",
+            url,
+            success: (response)=> {
+                $('#invoice_row_'+id).remove();
+                if($('#invoice_body').children().length < 1){
+                    $('#invoice_body').html('<tr id="invoice_nodata"><td colspan="2" class="text-center" >No Data</td></tr>');
+                }
             },
             error : (error) => {
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});

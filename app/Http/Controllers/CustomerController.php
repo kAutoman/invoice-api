@@ -80,7 +80,7 @@ class CustomerController extends Controller
     public function deleteCustomer($id)
     {
         DB::table('invoice')->where('customer_id',$id)->delete();
-        DB::table('customers')->find($id)->delete();
+        DB::table('customers')->where('id',$id)->delete();
         return response()->json('success');
     }
 

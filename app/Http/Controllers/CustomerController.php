@@ -33,6 +33,16 @@ class CustomerController extends Controller
         return view('dashboard',['results'=>$results,'categories'=>$categories,'search'=>$search]);
     }
 
+    public function getCustomerInfo($id){
+        $customer = DB::table('customers')->find($id);
+        $invoices = DB::table('invoice')->where('customer_id',$id)->get();
+        $returnArray = [];
+        $returnArray['status'] = 'success';
+        $returnArray['customer'] = $customer;
+        $returnArray['invoices'] = $invoices;
+        return response()->json($returnArray);
+    }
+
     public function getCustomerList(Request $request){
         $search = $request->get('search',[]);
         $categories = CategoriesModel::get();

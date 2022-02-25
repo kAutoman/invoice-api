@@ -15,18 +15,19 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('mobile_phone');
-            $table->text('email');
-            $table->text('name');
-            $table->text('address');
-            $table->text('town');
-            $table->text('postal_code');
-            $table->text('further_note');
-            $table->string('state');
-            $table->date('remind_date');
-            $table->integer('category_id');
-            $table->text('attached_files');
+            $table->text('title')->nullable();
+            $table->text('mobile_phone')->nullable();
+            $table->text('email')->nullable();
+            $table->text('name')->nullable();
+            $table->text('address')->nullable();
+            $table->text('town')->nullable();
+            $table->text('postal_code')->nullable();
+            $table->text('further_note')->nullable();
+            $table->string('state')->nullable();
+            $table->date('remind_date')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('sms_sent')->nullable();
+            $table->text('attached_files')->nullable();
             $table->timestamps();
         });
     }

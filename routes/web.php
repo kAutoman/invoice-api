@@ -39,8 +39,10 @@ Route::any('/auth/logout',function (){
 
 Route::middleware(['auth'])->group(function () {
     Route::any('/dashboard',[CustomerController::class,'index']);
+    Route::any('/getCustomerInfo/{id}',[CustomerController::class,'getCustomerInfo']);
     Route::any('/api/dashboard',[CustomerController::class,'index']);
     Route::get('/categories',[CategoryController::class,'index']);
+    Route::get('/getInvoiceList/{id}',[\App\Http\Controllers\InvoiceController::class,'getInvoiceList']);
     Route::post('/insertCategory',[CategoryController::class,'createCategory']);
     Route::post('/updateCategory',[CategoryController::class,'updateItem']);
     Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory']);

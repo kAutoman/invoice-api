@@ -76,8 +76,9 @@
                                 <td>{{$result->created_at}}</td>
                                 <td class="text-center">
                                     <input type="hidden" id='customer_{{$result->id}}' value="@json($result)">
-                                    <button type="button" class="btn btn-sm btn-outline-success" title="Edit"><i class="mdi mdi-pencil menu-icon"></i></button>
-                                    <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF"><i class="mdi mdi-file-pdf-outline menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-success" title="Edit" onclick="Dashboard.editCustomer({{$result->id}})"><i class="mdi mdi-pencil menu-icon"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF" onclick="Dashboard.getInvoiceList({{$result->id}})"><i class="mdi mdi-file-pdf-outline menu-icon"></i></button>
+                            
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
                                 </td>
                             </tr>
@@ -135,11 +136,18 @@
                                 <textarea name="data[further_note]" id="further_note" cols="30" rows="10" class="form-control form-control-md" placeholder="Further note"></textarea>
                             </div>
                             <div class="form-group">
+                                 <select name="data[sms_sent]" id="sms_sent" class="form-control-sm w-100">
+                                    <option value="">Select SMS Status</option>
+                                    <option value="1">Sent</option>
+                                    <option value="0">Not sent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <select name="data[state]" id="state" class="form-control-sm w-100">
-                                    <option value="">select state</option>
-                                    <option value="1">active</option>
-                                    <option value="2">completed</option>
-                                    <option value="3">waiting</option>
+                                    <option value="">Select state</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Completed</option>
+                                    <option value="3">Waiting</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -293,7 +301,40 @@
             </div>
         </div>
     </div>
+
+     <!-- invoice list Modal -->
+    <div class="modal fade" id="invoiceListModal" tabindex="-1" role="dialog" aria-labelledby="invoiceListModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">invoiceItem</h5>
+                    <a class="close" style="cursor: pointer" onclick="$('#invoiceListModal').modal('hide');" aria-label="Close">
+                        <i class="mdi mdi-close" id="fullscreen-button"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                     <table class="table table-bordered table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Invoice No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoice_list_body">
+                                        
+                                    </tbody>
+                                </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveInvoiceItem()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
+    <script type="text/javascript">
+        let BASE_URL = "{{url('')}}";
+    </script>
     <script src="{{asset('assets/custom/dashboard.js')}}"></script>
 @endsection

@@ -15,19 +15,19 @@ return new class extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_no');
-            $table->string('email');
-            $table->date('invoice_date');
-            $table->string('mobile_num');
-            $table->string('to');
-            $table->string('from_address');
-            $table->text('items');
-            $table->text('excluding_vat');
-            $table->integer('vat_amount');
-            $table->integer('invoice_total');
-            $table->integer('payed_amount');
-            $table->integer('due_total');
-            $table->text('comment');
+            $table->string('invoice_no')->nullable();
+            $table->string('email')->nullable();
+            $table->date('invoice_date')->nullable();
+            $table->string('mobile_num')->nullable();
+            $table->string('to')->nullable();
+            $table->string('from_address')->nullable();
+            $table->text('items')->nullable();
+            $table->text('excluding_vat')->nullable();
+            $table->integer('vat_amount')->nullable();
+            $table->integer('invoice_total')->nullable();
+            $table->integer('payed_amount')->nullable();
+            $table->integer('due_total')->nullable();
+            $table->text('comment')->nullable();
             $table->integer('customer_id')->nullable();
             $table->timestamps();
         });

@@ -14,6 +14,40 @@ const Dashboard = {
             }
         });
     },
+    getInvoiceList : (id) => {
+        $.ajax({
+            type: "GET",
+            url: '/getInvoiceList/'+id,
+            success: (response)=> {
+                let html='';
+                for(let temp of response){
+                    html += '<tr><td> <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF" onclick="Dashboard.pdfExport('+temp.id+')"><i class="mdi mdi-file-download-outline menu-icon"></i></button></td>'    
+                    html += '<td>'+temp.invoice_no+'</td></tr>'
+                }
+            
+                $('#invoice_list_body').html(html);
+                $('#invoiceListModal').modal('show');
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        }); 
+    },
+    editCustomer: (id) => {
+        let url = '/getCustomerInfo/'+id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: (response)=> {
+                if (response.status === 'success') {
+                    
+                }
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });  
+    },
     addInvoice : () => {
         $('#categoryModal').modal('hide');
         $('#invoiceModal').modal('show');
@@ -113,18 +147,10 @@ const Dashboard = {
             }
         });
     },
+
     pdfExport : (id) => {
-        let url = '/pdfExport/'+id;
-        $.ajax({
-            type: "GET",
-            url,
-            success: (response)=> {
-                location.reload();
-            },
-            error : (error) => {
-                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
-            }
-        });
+        let url = '/pdfInvoiceExport/'+id;
+        window.open(BASE_URL + url,'blank');
     }
 }
 Dropzone.autoDiscover = false;

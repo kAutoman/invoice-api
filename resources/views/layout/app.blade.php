@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.css">
     <!-- endinject -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.1/toastr.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -124,6 +125,7 @@
 <!-- Plugin js for this page -->
 <script src="{{asset('assets/vendors/chart.js/Chart.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.cookie.js')}}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <!-- End plugin js for this page -->
 <!-- inject:js -->
 <script src="{{asset('assets/js/off-canvas.js')}}"></script>

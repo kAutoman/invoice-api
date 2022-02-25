@@ -40,8 +40,8 @@
                                 <option value="{{$category->id}}" {{!empty($search['category'])&&$search['category'] == $category->id ? 'selected':''}}>{{$category->name}}</option>
                             @endforeach
                         </select>
-                        <input type="date" class="form-control" style="width: 200px" id="search_date_from" placeholder="Date From" name="search[date_from]" value="{{$search['date_from']?? ''}}">
-                        <input type="date" class="form-control" style="width: 200px" id="search_date_to" placeholder="Date To" name="search[date_to]" value="{{$search['date_to']?? ''}}">
+                        <input type="text" class="form-control date-picker" style="width: 200px" id="search_date_from" placeholder="Date From" name="search[date_from]" value="{{$search['date_from']?? ''}}">
+                        <input type="text" class="form-control date-picker" style="width: 200px" id="search_date_to" placeholder="Date To" name="search[date_to]" value="{{$search['date_to']?? ''}}">
                     </form>
                 </div>
             </h3>
@@ -56,6 +56,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">title</th>
                     <th scope="col">Email</th>
                     <th scope="col">Mobile Number</th>
                     <th scope="col">Name</th>
@@ -68,6 +69,7 @@
                         @foreach($results as $key=>$result)
                             <tr>
                                 <th scope="row">{{$key+1}}</th>
+                                <td>{{$result->title}}</td>
                                 <td>{{$result->email}}</td>
                                 <td>{{$result->mobile_phone}}</td>
                                 <td>{{$result->name}}</td>
@@ -82,7 +84,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="6" class="text-center"> No Data</td>
+                            <td colspan="7" class="text-center"> No Data</td>
                         </tr>
                     @endif
 
@@ -124,10 +126,10 @@
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[postal_code]" id="postal_code" placeholder="Postal Code">
                             </div>
-                            <div class="form-group"><input type="datetime-local" class="form-control form-control-md" name="data[created_at]"  placeholder="Date form created"></div>
-                            <div class="form-group"><input type="datetime-local" class="form-control form-control-md" name="data[updated_at]"  placeholder="Date form updated"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[created_at]"  placeholder="Date form created"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[updated_at]"  placeholder="Date form updated"></div>
                             <div class="form-group">
-                                <input type="date" class="form-control form-control-md" name="data[remind_date]" id="remind_date" placeholder="remind date">
+                                <input type="text" class="form-control form-control-md date-picker" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>
                             <div class="form-group">
                                 <textarea name="data[further_note]" id="further_note" cols="30" rows="10" class="form-control form-control-md" placeholder="Further note"></textarea>
@@ -205,7 +207,7 @@
                                 <input type="text" class="form-control form-control-md" name="data[email]" id="mq" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="date" class="form-control form-control-md" name="data[invoice_date]" id="description" placeholder="invoice Date">
+                                <input type="text" class="form-control form-control-md date-picker" name="data[invoice_date]" id="description" placeholder="invoice Date">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[mobile_num]"  placeholder="Mobile Number">

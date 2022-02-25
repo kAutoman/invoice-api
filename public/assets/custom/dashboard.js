@@ -125,6 +125,10 @@ $(document).ready(function(){
     $('#search_category').change(function (){
         $('#search_form').submit();
     });
+    $('.date-picker').datepicker({
+        format: 'yyyy-mm-dd',
+        orientation: "bottom left" // left bottom of the input field
+    });
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element

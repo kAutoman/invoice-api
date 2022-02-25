@@ -12,10 +12,10 @@
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_customers')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Customer</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_invoices')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export invoices</button>
-                    <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="customer_form">
+                    <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="customer_csv_form">
                         <input type="file" id="import_file_btn" name="file" hidden>
                     </form>
-                    <form action="{{url('/import_invoices')}}" method="post" enctype="multipart/form-data" id="invoice_form">
+                    <form action="{{url('/import_invoices')}}" method="post" enctype="multipart/form-data" id="invoice_csv_form">
                         <input type="file" id="import_invoice_btn" name="file" hidden>
                     </form>
                     <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Customer</button>
@@ -30,9 +30,9 @@
                         <input type="text" class="form-control" id="search_customer" placeholder="Search Customer..." name="search[email]" value="{{$search['email']?? ''}}">
                         <select name="search[state]" id="search_status" class="form-control ml-2">
                             <option value="">select status</option>
-                            <option value="1" {{$search['state'] == '1' ? 'selected':''}}>active</option>
-                            <option value="2" {{$search['state'] == '2' ? 'selected':''}}>complete</option>
-                            <option value="3" {{$search['state'] == '3' ? 'selected':''}}>waiting</option>
+                            <option value="1" {{!empty($search['state'])&&$search['state'] == '1' ? 'selected':''}}>active</option>
+                            <option value="2" {{!empty($search['state'])&&$search['state'] == '2' ? 'selected':''}}>complete</option>
+                            <option value="3" {{!empty($search['state'])&&$search['state'] == '3' ? 'selected':''}}>waiting</option>
                         </select>
                     </form>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <form id="customer_form">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[title]" id="title" placeholder="Title for tasks list...">
+                                <textarea name="data[title]" id="title" cols="30" rows="10" class="form-control form-control-md" placeholder="Title for tasks list..."></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[mobile_phone]" id="mobile_phone" placeholder="Mobile number">
@@ -121,7 +121,7 @@
                                 <input type="date" class="form-control form-control-md" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[further_note]" id="further_note" placeholder="Further note">
+                                <textarea name="data[further_note]" id="further_note" cols="30" rows="10" class="form-control form-control-md" placeholder="Further note"></textarea>
                             </div>
                             <div class="form-group">
                                 <select name="data[state]" id="state" class="form-control-sm w-100">

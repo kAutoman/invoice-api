@@ -50,6 +50,7 @@ const Dashboard = {
     },
     saveInvoice : () => {
         let data = $('#invoice_form').serialize();
+        console.log(data);
         let url = '/insertInvoice';
         $.ajax({
             type: "POST",
@@ -113,10 +114,10 @@ const Dashboard = {
 Dropzone.autoDiscover = false;
 $(document).ready(function(){
     $('#import_file_btn').change(function (){
-        $('#customer_form').submit();
+        $('#customer_csv_form').submit();
     });
     $('#import_invoice_btn').change(function (){
-        $('#invoice_form').submit();
+        $('#invoice_csv_form').submit();
     });
     $('#search_status').change(function (){
         $('#search_form').submit();

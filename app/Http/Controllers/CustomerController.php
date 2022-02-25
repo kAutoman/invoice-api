@@ -39,7 +39,7 @@ class CustomerController extends Controller
     public function insertCustomer(Request $request)
     {
         $record = $request->get('data',[]);
-        $invoiceIds = $record['invoiceIds'];
+        $invoiceIds = $record['invoiceIds']??[];
         unset($record['invoiceIds']);
         $resultId = DB::table('customers')->insertGetId($record);
         DB::table('invoice')->whereIn('id',$invoiceIds)->update(['customer_id'=>$resultId]);

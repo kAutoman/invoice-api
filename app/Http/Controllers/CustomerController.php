@@ -19,6 +19,16 @@ class CustomerController extends Controller
         if (!empty($search['state'])){
             $results = $results->where('state',"{$search['state']}");
         }
+        if (!empty($search['category'])){
+            $results = $results->where('category_id',"{$search['category']}");
+        }
+
+        if (!empty($search['date_from'])){
+            $results = $results->where('created_at','>',"{$search['date_from']}");
+        }
+        if (!empty($search['date_to'])){
+            $results = $results->where('created_at','<',"{$search['date_to']}");
+        }
         $results = $results->get();
         return view('dashboard',['results'=>$results,'categories'=>$categories,'search'=>$search]);
     }
@@ -33,6 +43,17 @@ class CustomerController extends Controller
         if (!empty($search['state'])){
             $results = $results->where('state',"{$search['state']}");
         }
+        if (!empty($search['category'])){
+            $results = $results->where('category_id',"{$search['category']}");
+        }
+
+        if (!empty($search['date_from'])){
+            $results = $results->where('created_at','>',"{$search['date_from']}");
+        }
+        if (!empty($search['date_to'])){
+            $results = $results->where('created_at','<',"{$search['date_to']}");
+        }
+        $results = $results->get();
         return response()->json(['results'=>$results,'categories'=>$categories,'search'=>$search]);
     }
 

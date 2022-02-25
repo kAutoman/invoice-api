@@ -122,6 +122,9 @@ $(document).ready(function(){
     $('#search_status').change(function (){
         $('#search_form').submit();
     });
+    $('#search_category').change(function (){
+        $('#search_form').submit();
+    });
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element

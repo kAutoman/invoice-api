@@ -27,13 +27,21 @@
             <h3 class="page-title">
                 <div class="form-inline">
                     <form action="{{url('/dashboard')}}" method="post" id="search_form">
-                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer..." name="search[email]" value="{{$search['email']?? ''}}">
+                        <input type="text" class="form-control" id="search_customer" placeholder="Search Customer" name="search[email]" value="{{$search['email']?? ''}}">
                         <select name="search[state]" id="search_status" class="form-control ml-2">
                             <option value="">select status</option>
                             <option value="1" {{!empty($search['state'])&&$search['state'] == '1' ? 'selected':''}}>active</option>
                             <option value="2" {{!empty($search['state'])&&$search['state'] == '2' ? 'selected':''}}>complete</option>
                             <option value="3" {{!empty($search['state'])&&$search['state'] == '3' ? 'selected':''}}>waiting</option>
                         </select>
+                        <select name="search[category]" id="search_category" class="form-control ml-2">
+                            <option value="">select category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}" {{!empty($search['category'])&&$search['category'] == $category->id ? 'selected':''}}>{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                        <input type="date" class="form-control" style="width: 200px" id="search_date_from" placeholder="Date From" name="search[date_from]" value="{{$search['date_from']?? ''}}">
+                        <input type="date" class="form-control" style="width: 200px" id="search_date_to" placeholder="Date To" name="search[date_to]" value="{{$search['date_to']?? ''}}">
                     </form>
                 </div>
             </h3>
@@ -65,6 +73,7 @@
                                 <td>{{$result->name}}</td>
                                 <td>{{$result->created_at}}</td>
                                 <td class="text-center">
+                                    <input type="hidden" id='customer_{{$result->id}}' value="@json($result)">
                                     <button type="button" class="btn btn-sm btn-outline-success" title="Edit"><i class="mdi mdi-pencil menu-icon"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF"><i class="mdi mdi-file-pdf-outline menu-icon"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>

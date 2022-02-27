@@ -127,8 +127,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[postal_code]" id="postal_code" placeholder="Postal Code">
                             </div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[created_at]" id="created_at"  placeholder="Date form created"></div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[updated_at]" id="updated_at" placeholder="Date form updated"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[created_at]" id="created_at" readonly placeholder="Date form created" value="{{date('Y-m-d H:i:s')}}"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[updated_at]" id="updated_at" readonly placeholder="Date form updated" value=""></div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md date-picker" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>

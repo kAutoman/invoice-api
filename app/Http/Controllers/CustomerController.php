@@ -77,6 +77,16 @@ class CustomerController extends Controller
         return response()->json('success');
     }
 
+    public function updateCustomer($id,Request $request) {
+        if (empty($id)){
+            return response()->json('no_id',400);
+        }
+        $record = $request->get('data',[]);
+        unset($record['invoiceIds']);
+        DB::table('customers')->where('id',$id)->update($record);
+        return response()->json('success');
+    }
+
     public function deleteCustomer($id)
     {
         DB::table('invoice')->where('customer_id',$id)->delete();

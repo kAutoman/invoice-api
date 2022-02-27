@@ -21,32 +21,70 @@ const Dashboard = {
             success: (response)=> {
                 let html='';
                 for(let temp of response){
-                    html += '<tr><td> <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF" onclick="Dashboard.pdfExport('+temp.id+')"><i class="mdi mdi-file-download-outline menu-icon"></i></button></td>'    
+                    html += '<tr><td> <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF" onclick="Dashboard.pdfExport('+temp.id+')"><i class="mdi mdi-file-download-outline menu-icon"></i></button></td>'
                     html += '<td>'+temp.invoice_no+'</td></tr>'
                 }
-            
+
                 $('#invoice_list_body').html(html);
                 $('#invoiceListModal').modal('show');
             },
             error : (error) => {
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
             }
-        }); 
+        });
+    },
+    preview : () => {
+        frame.src = URL.createObjectURL(event.target.files[0]);
     },
     editCustomer: (id) => {
         let url = '/getCustomerInfo/'+id;
+        $('#hid_mode').val('edit');
         $.ajax({
             type: "GET",
             url: url,
             success: (response)=> {
                 if (response.status === 'success') {
-                    
+                    console.log(response);
+                    $('#title').val(response.customer.title);
+                    $('#mobile_phone').val(response.customer.mobile_phone);
+                    $('#customer_email').val(response.customer.email);
+                    $('#name').val(response.customer.name);
+                    $('#address').val(response.customer.address);
+                    $('#town').val(response.customer.town);
+                    $('#postal_code').val(response.customer.postal_code);
+                    $('#created_at').val(response.customer.created_at);
+                    $('#updated_at').val(response.customer.updated_at);
+                    $('#remind_date').val(response.customer.remind_date);
+                    $('#further_note').val(response.customer.further_note);
+                    $('#hid_attached_files').val(response.customer.attached_files);
+                    $('#sms_sent').val(response.customer.sms_sent).change();
+                    $('#state').val(response.customer.state).change();
+                    $('#category').val(response.customer.category_id).change();
+                    let files = response.customer.attached_files;
+                    let parsed = JSON.parse(files);
+                    for(let value of parsed) {
+                        let mockFile = { name: value, size: 100};
+                        dropzoneInstance.emit("addedfile", mockFile);
+                        dropzoneInstance.emit("thumbnail", mockFile, 'uploads/'+value);
+                        dropzoneInstance.emit("complete", mockFile);
+                    };
+                    $('#customer_id').val(response.customer.id);
+                    if (response.invoices.length > 0){
+                        let html = '';
+                        for (let tmp of response.invoices){
+                            html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
+                        }
+                        $('#invoice_nodata').remove();
+                        $('#invoice_body').append(html);
+                    }
+                    // $('#category').val(response.customer.category_id).change();
+                    $('#categoryModal').modal('show');
                 }
             },
             error : (error) => {
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
             }
-        });  
+        });
     },
     addInvoice : () => {
         $('#categoryModal').modal('hide');
@@ -105,7 +143,15 @@ const Dashboard = {
 
     saveCustomer : () => {
         let data = $('#customer_form').serialize();
-        let url = '/insertCustomer';
+        let mode = $('#hid_mode').val();
+        let url;
+        if (mode === 'add'){
+            url = '/insertCustomer';
+        }
+        else {
+            url = '/updateCustomer/'+$('#customer_id').val();
+        }
+
         $.ajax({
             type: "POST",
             url,
@@ -119,6 +165,8 @@ const Dashboard = {
         });
     },
     deleteCustomer : (id) => {
+        x = confirm('Do you want to delete?');
+        if(!x)  return false;
         let url = '/deleteCustomer/'+id;
         $.ajax({
             type: "GET",
@@ -132,6 +180,8 @@ const Dashboard = {
         });
     },
     deleteInvoice : (id) => {
+        x = confirm('Do you want to delete?');
+        if(!x)  return false;
         let url = '/deleteInvoice/'+id;
         $.ajax({
             type: "GET",
@@ -153,6 +203,7 @@ const Dashboard = {
         window.open(BASE_URL + url,'blank');
     }
 }
+let dropzoneInstance;
 Dropzone.autoDiscover = false;
 $(document).ready(function(){
     $('#import_file_btn').change(function (){
@@ -174,6 +225,9 @@ $(document).ready(function(){
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element
+        init : function (){
+            dropzoneInstance = this;
+        },
         success: function(file, response){
             let fileuploded = file.previewElement.querySelector("[data-dz-name]");
             fileuploded.innerHTML = response;
@@ -185,10 +239,18 @@ $(document).ready(function(){
         },
         addRemoveLinks: true, // Don't show remove links on dropzone itself.
         removedfile: function(file) {
-            console.log(file.upload);
+            console.log(file.name);
             x = confirm('Do you want to delete?');
             if(!x)  return false;
             file.previewElement.remove();
+            let originFiles = JSON.parse($('#hid_attached_files').val());
+            let temp = [];
+            for (let tmp of originFiles){
+                if (tmp !== file.name){
+                    temp.push(tmp);
+                }
+            }
+            $('#hid_attached_files').val(JSON.stringify(temp));
         },
     });
 })

@@ -78,7 +78,7 @@
                                     <input type="hidden" id='customer_{{$result->id}}' value="@json($result)">
                                     <button type="button" class="btn btn-sm btn-outline-success" title="Edit" onclick="Dashboard.editCustomer({{$result->id}})"><i class="mdi mdi-pencil menu-icon"></i></button>
                                     <button type="button" class="btn btn-sm btn-outline-info" title="Export Invoice to PDF" onclick="Dashboard.getInvoiceList({{$result->id}})"><i class="mdi mdi-file-pdf-outline menu-icon"></i></button>
-                            
+
                                     <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="Dashboard.deleteCustomer({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
                                 </td>
                             </tr>
@@ -127,8 +127,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[postal_code]" id="postal_code" placeholder="Postal Code">
                             </div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[created_at]"  placeholder="Date form created"></div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[updated_at]"  placeholder="Date form updated"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[created_at]" id="created_at"  placeholder="Date form created"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md date-picker" name="data[updated_at]" id="updated_at" placeholder="Date form updated"></div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md date-picker" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>
@@ -160,6 +160,7 @@
                             </div>
 
                             <input type="hidden" name="data[attached_files]" id="hid_attached_files" value="[]">
+                            <input type="hidden" name="mode" id="hid_mode" value="add">
                             <input type="hidden" class="form-control form-control-md" name="id" id="customer_id" value="0">
                             <div class="form-group">
                                 <div class="dropzone dz-clickable" id="my-dropzone">
@@ -207,7 +208,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <form id="invoice_form">
+                        <form id="invoice_form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="mb-2">
+                                    <label for="Image" class="form-label">Invoice Image 1</label>
+                                    <input class="form-control" type="file" id="formFile" onchange="Dashboard.preview()">
+                                </div>
+                                <img id="frame" src="" class="img-fluid" />
+                            </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[invoice_no]" id="q" placeholder="invoice No">
                             </div>
@@ -321,12 +329,9 @@
                                         </tr>
                                     </thead>
                                     <tbody id="invoice_list_body">
-                                        
+
                                     </tbody>
                                 </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveInvoiceItem()">Add</button>
                 </div>
             </div>
         </div>

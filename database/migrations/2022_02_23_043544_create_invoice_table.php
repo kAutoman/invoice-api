@@ -29,6 +29,8 @@ return new class extends Migration
             $table->integer('due_total')->nullable();
             $table->text('comment')->nullable();
             $table->integer('customer_id')->nullable();
+            $table->text('preset1')->nullable();
+            $table->text('preset2')->nullable();
             $table->timestamps();
         });
     }

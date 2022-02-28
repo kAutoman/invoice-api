@@ -63,6 +63,7 @@ const Dashboard = {
                     $('#sms_sent').val(response.customer.sms_sent).change();
                     $('#state').val(response.customer.state).change();
                     $('#category').val(response.customer.category_id).change();
+                    $('.dz-image-preview').remove();
                     let files = response.customer.attached_files;
                     let parsed = JSON.parse(files);
                     for(let value of parsed) {

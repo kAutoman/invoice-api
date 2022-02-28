@@ -83,6 +83,7 @@ class CustomerController extends Controller
         }
         $record = $request->get('data',[]);
         unset($record['invoiceIds']);
+        $record['updated_at'] = date('Y-m-d H:i:s');
         DB::table('customers')->where('id',$id)->update($record);
         return response()->json('success');
     }

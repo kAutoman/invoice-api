@@ -9,7 +9,7 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
-                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show');$('#customer_form')[0].reset();"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_customers')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Customer</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_invoices')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export invoices</button>
                     <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="customer_csv_form">
@@ -208,13 +208,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <form id="invoice_form" enctype="multipart/form-data">
-                            <div class="form-group">
+                        <form id="invoice_form">
+                            <div class="form-group text-center">
                                 <div class="mb-2">
-                                    <label for="Image" class="form-label">Invoice Image 1</label>
-                                    <input class="form-control" type="file" id="formFile" onchange="Dashboard.preview()">
+                                    <label for="Image" class="form-label">Preset 1</label>
+                                    <input class="form-control" type="file" id="formFile" name="preset1" onchange="Dashboard.preview1()" accept="image/jpg, image/jpeg">
                                 </div>
-                                <img id="frame" src="" class="img-fluid" />
+                                <img id="frame1" src="{{asset('/assets/images/logo.jpg')}}" class="img-fluid" width="300" height="300"/>
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="mb-2">
+                                    <label for="Image" class="form-label">Preset 2</label>
+                                    <input class="form-control" type="file" id="formFile" name="preset2" onchange="Dashboard.preview2()" accept="image/jpg, image/jpeg" >
+                                </div>
+                                <img id="frame2" src="{{asset('/assets/images/logo2.jpg')}}" class="img-fluid" width="300" height="300"/>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[invoice_no]" id="q" placeholder="invoice No">

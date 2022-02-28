@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
-    public function uploadFile()
-    {
-
-    }
 
     public function uploadCustomerAttach(Request $request)
     {

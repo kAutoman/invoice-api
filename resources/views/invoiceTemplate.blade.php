@@ -1,12 +1,12 @@
 <div class="container">
     <div style="text-align: right;">
-        <h5>Invoice</h3>
+        <h5>Invoice</h5>
         <h5>Invoice Date: {{$invoiceData->invoice_date}}</h5>
         <h5>Invoice No: {{$invoiceData->invoice_no}}</h5>
     </div>
     <div style="display: inline-block;">
-        <img src="{{public_path('/assets/images/logo.jpg')}}"width="170" height="100">
-        <img src="{{public_path('/assets/images/logo2.jpg')}}" width="170" height="100">
+        <img src="{{empty($invoiceData->preset1)? public_path('/assets/images/logo.jpg') :public_path("/uploads/invoice/{$invoiceData->preset1}") }}" width="170" height="100">
+        <img src="{{empty($invoiceData->preset2)? public_path('/assets/images/logo2.jpg') :public_path("/uploads/invoice/{$invoiceData->preset2}") }}" width="170" height="100">
     </div>
     <div style="text-align: left;">
         <h4>{{$invoiceData->from_address}}</h4>
@@ -21,8 +21,8 @@
         <tr>
             <th style="text-align:center;"><b>QTY</b></th>
             <th style="text-align:center;"><b>DESCRIPTION</b></th>
-            <th style="text-align:center;"><b>PRICE</b></th>   
-            <th style="text-align:center;"><b>TOTAL</b></th>   
+            <th style="text-align:center;"><b>PRICE</b></th>
+            <th style="text-align:center;"><b>TOTAL</b></th>
         </tr>
         @foreach(json_decode($invoiceData->items) as $item)
             <tr>
@@ -45,4 +45,4 @@
             <h4>Due Total: {{$invoiceData->due_total}}</h4>
         </div>
     </div>
-</div>  
+</div>

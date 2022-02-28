@@ -14,6 +14,12 @@ const Dashboard = {
             }
         });
     },
+    preview1 : () => {
+        frame1.src = URL.createObjectURL(event.target.files[0]);
+    },
+    preview2 : () => {
+        frame2.src = URL.createObjectURL(event.target.files[0]);
+    },
     getInvoiceList : (id) => {
         $.ajax({
             type: "GET",
@@ -32,9 +38,6 @@ const Dashboard = {
                 toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
             }
         });
-    },
-    preview : () => {
-        frame.src = URL.createObjectURL(event.target.files[0]);
     },
     editCustomer: (id) => {
         let url = '/getCustomerInfo/'+id;
@@ -75,6 +78,7 @@ const Dashboard = {
                             html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
                         }
                         $('#invoice_nodata').remove();
+                        $('#invoice_body').html('');
                         $('#invoice_body').append(html);
                     }
                     // $('#category').val(response.customer.category_id).change();
@@ -121,13 +125,15 @@ const Dashboard = {
         $('#invoiceModal').modal('show');
     },
     saveInvoice : () => {
-        let data = $('#invoice_form').serialize();
-        console.log(data);
+        let formData = new FormData($('#invoice_form')[0]);
         let url = '/insertInvoice';
         $.ajax({
             type: "POST",
             url,
-            data,
+            data:formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
             success: (response)=> {
                 let html = '<tr id="invoice_row_'+response.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+response.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
                 $('#invoice_nodata').remove();

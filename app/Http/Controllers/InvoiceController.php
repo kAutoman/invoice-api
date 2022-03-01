@@ -15,6 +15,8 @@ class InvoiceController extends Controller
         $record = $request->get('data',[]);
         $preset1 = $request->file('preset1');
         $preset2 = $request->file('preset2');
+        $id = $request->get('id',0);
+        $mode = $request->get('mode','add');
         if (!empty($preset1)){
             $now = microtime(true)*10000;
             $record['preset1'] = $now.'_'.auth()->user()->name.'_preset1.'.$preset1->getClientOriginalExtension();
@@ -28,12 +30,17 @@ class InvoiceController extends Controller
         if (empty($record)){
             return response()->json('no_data',400);
         }
-
-        $id = DB::table('invoice')->insertGetId($record);
+        if ($mode === 'add'){
+            $id = DB::table('invoice')->insertGetId($record);
+        }
+        else {
+            DB::table('invoice')->where('id',$id)->update($record);
+        }
         $result = [
             'result'=>$record,
             'id'=>$id
         ];
+
         return response()->json($result);
     }
 

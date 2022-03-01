@@ -224,25 +224,27 @@
                                 <img id="frame2" src="{{asset('/assets/images/logo2.jpg')}}" class="img-fluid" width="300" height="300"/>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[invoice_no]" id="q" placeholder="invoice No">
+                                <input type="text" class="form-control form-control-md" name="data[invoice_no]" id="invoice_no" placeholder="invoice No">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[email]" id="mq" placeholder="Email">
+                                <input type="text" class="form-control form-control-md" name="data[email]" id="invoice_email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md date-picker" name="data[invoice_date]" id="description" placeholder="invoice Date">
+                                <input type="text" class="form-control form-control-md date-picker" name="data[invoice_date]" id="invoice_date" placeholder="invoice Date">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[mobile_num]"  placeholder="Mobile Number">
+                                <input type="text" class="form-control form-control-md" name="data[mobile_num]" id="invoice_mobile_num"  placeholder="Mobile Number">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[to]"  placeholder="to">
+                                <input type="text" class="form-control form-control-md" name="data[to]" id="invoice_to" placeholder="to">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[from_address]"  placeholder="from address">
+                                <input type="text" class="form-control form-control-md" name="data[from_address]" id="invoice_from_addr" placeholder="from address">
                             </div>
                             <div class="form-group">
                                 <input type="hidden" id="hid_invoice_items" name="data[items]" value="[]">
+                                <input type="hidden" id="hid_invoice_mode" name="mode" value="add">
+                                <input type="hidden" id="hid_invoice_id" name="id" value="0id">
                                 <button type="button" class="btn btn-gradient-info" onclick="Dashboard.addInvoiceItem()"> ADD INVOICE ITEM</button>
                             </div>
                             <div class="form-group">

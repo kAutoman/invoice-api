@@ -76,7 +76,7 @@ const Dashboard = {
                     if (response.invoices.length > 0){
                         let html = '';
                         for (let tmp of response.invoices){
-                            html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
+                            html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td class="cursor-pointer" onclick="Dashboard.editInvoice('+tmp.id+')"><input type="hidden" id="invoiceData_'+tmp.id+'" value='+JSON.stringify(tmp)+'><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
                         }
                         $('#invoice_nodata').remove();
                         $('#invoice_body').html('');
@@ -91,7 +91,46 @@ const Dashboard = {
             }
         });
     },
+    editInvoice : (invoiceItemId) => {
+        $('#categoryModal').modal('hide');
+        let invoiceItem = $('#invoiceData_'+invoiceItemId).val();
+        console.log(invoiceItem);
+        invoiceItem = JSON.parse(invoiceItem);
+        $('#invoice_form')[0].reset();
+        if (invoiceItem.preset1){
+            $('#frame1').attr('src','/uploads/invoice/'+invoiceItem.preset1);
+        }
+        if (invoiceItem.preset2){
+            $('#frame2').attr('src','/uploads/invoice/'+invoiceItem.preset2);
+        }
+        $('#invoice_no').val(invoiceItem.invoice_no);
+        $('#invoice_email').val(invoiceItem.email);
+        $('#invoice_date').val(invoiceItem.invoice_date);
+        $('#invoice_mobile_num').val(invoiceItem.mobile_num);
+        $('#invoice_to').val(invoiceItem.to);
+        $('#invoice_from_addr').val(invoiceItem.from_address);
+        $('#hid_invoice_items').val(invoiceItem.items);
+        $('#hid_invoice_mode').val('edit');
+        $('#hid_invoice_id').val(invoiceItemId);
+        $('#invoice_item_body').html('');
+        let html = '';
+        let parsed = JSON.parse(invoiceItem.items);
+        for (let item of parsed){
+            html += '<tr class="cursor-pointer" onclick="Dashboard.editInvoiceItem('+item.id+')">'+
+                '<th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick=""></i></th>'+
+                '<td>'+item.quality+'</td>'+
+                '<td>'+item.description+'</td>'+
+                '<td>'+item.price+'</td>'+
+                '</tr>';
+        }
+        $('#invoice_item_body').html(html);
+        $('#invoiceModal').modal('show');
+    },
+    editInvoiceItem : () => {
+
+    },
     addInvoice : () => {
+        $('#hid_invoice_mode').val('add');
         $('#categoryModal').modal('hide');
         $('#invoiceModal').modal('show');
     },
@@ -136,8 +175,12 @@ const Dashboard = {
             processData: false,
             contentType: false,
             success: (response)=> {
-                let html = '<tr id="invoice_row_'+response.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+response.id+')"></i></th> <td><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
+                let html = '<tr id="invoice_row_'+response.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+response.id+')"></i></th> <td class="cursor-pointer" onclick="Dashboard.editInvoice('+response.id+')"><input type="hidden" id="invoiceData_'+response.id+'" value='+JSON.stringify(response)+'><input type="hidden" name="data[invoiceIds]['+response.id+']" value="'+response.id+'">'+response.result.invoice_no+'</td></tr>';
                 $('#invoice_nodata').remove();
+                let mode = $('#hid_invoice_mode').val();
+                if (mode === 'edit'){
+                    $('#invoice_row_'+response.id).remove();
+                }
                 $('#invoice_body').append(html);
                 $('#invoiceModal').modal('hide');
                 $('#categoryModal').modal('show');

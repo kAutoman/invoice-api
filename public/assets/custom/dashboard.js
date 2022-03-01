@@ -81,6 +81,10 @@ const Dashboard = {
                         $('#invoice_nodata').remove();
                         $('#invoice_body').html('');
                         $('#invoice_body').append(html);
+                    }else {
+                        $('#invoice_body').html('<tr id="invoice_nodata">\n' +
+                            '   <td colspan="2" class="text-center" >No Data</td>\n' +
+                            '</tr>');
                     }
                     // $('#category').val(response.customer.category_id).change();
                     $('#categoryModal').modal('show');
@@ -204,6 +208,7 @@ const Dashboard = {
         $('#invoiceModal').modal('show');
     },
     saveInvoice : () => {
+        $('#hid_customer_id').val($('#customer_id').val());
         let formData = new FormData($('#invoice_form')[0]);
         let url = '/insertInvoice';
         $.ajax({
@@ -307,10 +312,7 @@ $(document).ready(function(){
     $('#search_category').change(function (){
         $('#search_form').submit();
     });
-    $('.date-picker').datepicker({
-        format: 'yyyy-mm-dd',
-        orientation: "bottom left" // left bottom of the input field
-    });
+    $('.date-picker').datetimepicker();
     let originFile;
     $("#my-dropzone").dropzone({
         url: "/customer/attach_file", // If not using a form element

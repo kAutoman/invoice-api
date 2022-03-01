@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('postal_code')->nullable();
             $table->text('further_note')->nullable();
             $table->string('state')->nullable();
-            $table->date('remind_date')->nullable();
+            $table->dateTime('remind_date')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('sms_sent')->nullable();
             $table->text('attached_files')->nullable();

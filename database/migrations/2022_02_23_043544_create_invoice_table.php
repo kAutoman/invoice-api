@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_no')->nullable();
             $table->string('email')->nullable();
-            $table->date('invoice_date')->nullable();
+            $table->dateTime('invoice_date')->nullable();
             $table->string('mobile_num')->nullable();
             $table->string('to')->nullable();
             $table->string('from_address')->nullable();

@@ -130,7 +130,7 @@
                             <div class="form-group"><input type="text" class="form-control form-control-md" name="data[created_at]" id="created_at" readonly placeholder="Date form created" value="{{date('Y-m-d H:i:s')}}"></div>
                             <div class="form-group"><input type="text" class="form-control form-control-md" name="data[updated_at]" id="updated_at" readonly placeholder="Date form updated" value=""></div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md date-picker" name="data[remind_date]" id="remind_date" placeholder="remind date">
+                                <input type="datetime-local" class="form-control form-control-md" autocomplete="off" name="data[remind_date]" id="remind_date" placeholder="remind date">
                             </div>
                             <div class="form-group">
                                 <textarea name="data[further_note]" id="further_note" cols="30" rows="10" class="form-control form-control-md" placeholder="Further note"></textarea>
@@ -230,7 +230,7 @@
                                 <input type="text" class="form-control form-control-md" name="data[email]" id="invoice_email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md date-picker" name="data[invoice_date]" id="invoice_date" placeholder="invoice Date">
+                                <input type="datetime-local" class="form-control form-control-md" name="data[invoice_date]" id="invoice_date" placeholder="invoice Date">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" name="data[mobile_num]" id="invoice_mobile_num"  placeholder="Mobile Number">
@@ -244,7 +244,8 @@
                             <div class="form-group">
                                 <input type="hidden" id="hid_invoice_items" name="data[items]" value="[]">
                                 <input type="hidden" id="hid_invoice_mode" name="mode" value="add">
-                                <input type="hidden" id="hid_invoice_id" name="id" value="0id">
+                                <input type="hidden" id="hid_invoice_id" name="id" value="0">
+                                <input type="hidden" id="hid_customer_id" name="data[customer_id]" value="0">
                                 <button type="button" class="btn btn-gradient-info" onclick="Dashboard.addInvoiceItem()"> ADD INVOICE ITEM</button>
                             </div>
                             <div class="form-group">

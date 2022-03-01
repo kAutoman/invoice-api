@@ -115,16 +115,36 @@ const Dashboard = {
         $('#invoice_item_body').html('');
         let html = '';
         let parsed = JSON.parse(invoiceItem.items);
+        let i= 0;
         for (let item of parsed){
-            html += '<tr class="cursor-pointer" onclick="Dashboard.editInvoiceItem('+item.id+')">'+
-                '<th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick=""></i></th>'+
+            html += '<tr class="cursor-pointer" onclick="Dashboard.editInvoiceItem('+i+');">'+
+                '<th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="$(this).parent().parent().remove();Dashboard.removeInvoiceItem('+i+');"></i></th>'+
                 '<td>'+item.quality+'</td>'+
                 '<td>'+item.description+'</td>'+
                 '<td>'+item.price+'</td>'+
                 '</tr>';
+            i++;
+        }
+        if (html === ''){
+            html = ' <tr>\n' +
+                '      <td colspan="4" class="text-center">No data</td>\n' +
+                '    </tr>';
         }
         $('#invoice_item_body').html(html);
         $('#invoiceModal').modal('show');
+    },
+    removeInvoiceItem : (index) => {
+        let items = $('#hid_invoice_items').val();
+        let parsed = JSON.parse(items);
+        parsed.splice(index,1);
+        console.log(parsed);
+        let encoded = JSON.stringify(parsed);
+        if (parsed.length === 0){
+            $('#invoice_item_body').html('  <tr>\n' +
+                '                                          <td colspan="4" class="text-center">No data</td>\n' +
+                '                                      </tr>');
+        }
+        $('#hid_invoice_items').val(encoded);
     },
     editInvoiceItem : () => {
 
@@ -152,13 +172,15 @@ const Dashboard = {
         let encoded = JSON.stringify(parsed);
         $('#hid_invoice_items').val(encoded);
         let html = '';
+        let i = 0;
         for (let item of parsed){
-            html += '<tr>'+
-                '<th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"></i></th>'+
+            html += '<tr class="cursor-pointer" onclick="Dashboard.editInvoiceItem('+i+');">'+
+                '<th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer"  onclick="$(this).parent().parent().remove();Dashboard.removeInvoiceItem('+i+');"></i></th>'+
                 '<td>'+item.quality+'</td>'+
                 '<td>'+item.description+'</td>'+
                 '<td>'+item.price+'</td>'+
                 '</tr>';
+            i++;
         }
         $('#invoice_item_body').html(html);
         $('#invoiceItemModal').modal('hide');

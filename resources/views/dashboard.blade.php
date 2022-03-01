@@ -94,7 +94,7 @@
         </div>
     </div>
     <!-- add Modal -->
-    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="categoryModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,7 +197,7 @@
     </div>
 
     <!-- invoice Modal -->
-    <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="invoiceModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -290,7 +290,7 @@
     </div>
 
     <!-- invoice item Modal -->
-    <div class="modal fade" id="invoiceItemModal" tabindex="-1" role="dialog" aria-labelledby="invoiceItemModalLabel" aria-hidden="true">
+    <div class="modal fade" id="invoiceItemModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="invoiceItemModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -310,17 +310,19 @@
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-md" id="price" placeholder="price">
                             </div>
+                        <input type="hidden" id="hid_invoiceItem_mode" value="add">
+                        <input type="hidden" id="hid_invoiceItem_index" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveInvoiceItem()">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="Dashboard.saveInvoiceItem()">Save</button>
                 </div>
             </div>
         </div>
     </div>
 
      <!-- invoice list Modal -->
-    <div class="modal fade" id="invoiceListModal" tabindex="-1" role="dialog" aria-labelledby="invoiceListModalLabel" aria-hidden="true">
+    <div class="modal fade" id="invoiceListModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="invoiceListModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

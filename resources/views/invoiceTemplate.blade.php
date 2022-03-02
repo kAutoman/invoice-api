@@ -4,9 +4,9 @@
         <h5>Invoice Date: {{$invoiceData->invoice_date}}</h5>
         <h5>Invoice No: {{$invoiceData->invoice_no}}</h5>
     </div>
-    <div style="display: inline-block;">
-        <img src="{{empty($invoiceData->preset1)? public_path('/assets/images/logo.jpg') :public_path("/uploads/invoice/{$invoiceData->preset1}") }}" width="170" height="100">
-        <img src="{{empty($invoiceData->preset2)? public_path('/assets/images/logo2.jpg') :public_path("/uploads/invoice/{$invoiceData->preset2}") }}" width="170" height="100">
+    <div style="display: flex;">
+        <img src="{{empty($invoiceData->preset1)? public_path('/assets/images/logo.jpg') :public_path("/uploads/invoice/{$invoiceData->preset1}") }}" height="100">
+        <img src="{{empty($invoiceData->preset2)? public_path('/assets/images/logo2.jpg') :public_path("/uploads/invoice/{$invoiceData->preset2}") }}" height="100">
     </div>
     <div style="text-align: left;">
         <h4>{{$invoiceData->from_address}}</h4>

@@ -265,19 +265,19 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[excluding_vat]"  placeholder="excluding vat"></div>
-                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[vat_amount]"  placeholder="vat amount"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[excluding_vat]" id="excluding_vat" placeholder="excluding vat"></div>
+                            <div class="form-group"><input type="text" class="form-control form-control-md" name="data[vat_amount]" id="vat_amount" placeholder="vat amount"></div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[invoice_total]"  placeholder="invoice total">
+                                <input type="text" class="form-control form-control-md" name="data[invoice_total]" id="invoice_total" placeholder="invoice total">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[payed_amount]"  placeholder="payed amount">
+                                <input type="text" class="form-control form-control-md" name="data[payed_amount]" id="payed_amount" placeholder="payed amount">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-md" name="data[due_total]"  placeholder="due total">
+                                <input type="text" class="form-control form-control-md" name="data[due_total]" id="due_total" placeholder="due total">
                             </div>
                             <div class="form-group">
-                                <textarea rows="5" class="form-control form-control-md" name="data[comment]"  placeholder="comment"></textarea>
+                                <textarea rows="5" class="form-control form-control-md" name="data[comment]" id="invoice_comment" placeholder="comment"></textarea>
                             </div>
                         </form>
                     </div>

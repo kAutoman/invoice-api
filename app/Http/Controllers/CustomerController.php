@@ -180,11 +180,11 @@ class CustomerController extends Controller
             $temp['postal_code'] = $line[7];
             $temp['further_note'] = $line[8];
             $temp['state'] = $line[9];
-            $temp['remind_date'] = $line[10];
+            $temp['remind_date'] = $line[10] == ''? null: $line[10];
             $temp['category_id'] = $line[11];
             $temp['attached_files'] = $line[12];
             $temp['created_at'] = $line[13];
-            $temp['updated_at'] = $line[14];
+            $temp['updated_at'] = $line[14] == ''? null: $line[14];
             DB::table('customers')->insert($temp);
         }
 
@@ -284,17 +284,17 @@ class CustomerController extends Controller
             $temp['from_address'] = $line[6];
             $temp['items'] = $line[7];
             $temp['excluding_vat'] = $line[8];
-            $temp['vat_amount'] = $line[9];
-            $temp['invoice_total'] = $line[10];
-            $temp['payed_amount'] = $line[11];
-            $temp['due_total'] = $line[12];
+            $temp['vat_amount'] = $line[9] == '' ? 0 : $line[9];
+            $temp['invoice_total'] = $line[10] == '' ? 0 : $line[10];
+            $temp['payed_amount'] = $line[11] == '' ? 0 : $line[11];
+            $temp['due_total'] = $line[12] == '' ? 0 : $line[12];
             $temp['comment'] = $line[13];
             $temp['customer_id'] = $line[14];
             if (!empty($line[15])){
-                $temp['created_at'] = $line[15];
+                $temp['created_at'] = $line[15] == '' ? null : $line[15];
             }
             if (!empty($line[16])){
-                $temp['updated_at'] = $line[16];
+                $temp['updated_at'] = $line[16] == '' ? null : $line[16];
             }
             DB::table('invoice')->insert($temp);
         }

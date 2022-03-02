@@ -123,6 +123,12 @@ const Dashboard = {
         $('#invoice_mobile_num').val(invoiceItem.mobile_num);
         $('#invoice_to').val(invoiceItem.to);
         $('#invoice_from_addr').val(invoiceItem.from_address);
+        $('#excluding_vat').val(invoiceItem.excluding_vat);
+        $('#vat_amount').val(invoiceItem.vat_amount);
+        $('#invoice_total').val(invoiceItem.invoice_total);
+        $('#payed_amount').val(invoiceItem.payed_amount);
+        $('#due_total').val(invoiceItem.due_total);
+        $('#invoice_comment').val(invoiceItem.comment);
         $('#hid_invoice_items').val(invoiceItem.items);
         $('#hid_invoice_mode').val('edit');
         $('#hid_invoice_id').val(invoiceItemId);

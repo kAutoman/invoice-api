@@ -14,6 +14,15 @@ const Dashboard = {
             }
         });
     },
+    addCustomer : () => {
+        $('#hid_mode').val('add');
+        $('#categoryModal').modal('show');
+        $('#customer_form')[0].reset();
+        $('#invoice_body').html('<tr id="invoice_nodata">\n' +
+            '   <td colspan="2" class="text-center" >No Data</td>\n' +
+            '</tr>');
+        $('.dz-image-preview').remove();
+    },
     preview1 : () => {
         frame1.src = URL.createObjectURL(event.target.files[0]);
     },
@@ -64,6 +73,7 @@ const Dashboard = {
                     $('#state').val(response.customer.state).change();
                     $('#category').val(response.customer.category_id).change();
                     $('.dz-image-preview').remove();
+                    Dropzone.forElement("#my-dropzone").removeAllFiles(true);
                     let files = response.customer.attached_files;
                     let parsed = JSON.parse(files);
                     for(let value of parsed) {
@@ -76,7 +86,7 @@ const Dashboard = {
                     if (response.invoices.length > 0){
                         let html = '';
                         for (let tmp of response.invoices){
-                            html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td class="cursor-pointer" onclick="Dashboard.editInvoice('+tmp.id+')"><input type="hidden" id="invoiceData_'+tmp.id+'" value='+JSON.stringify(tmp).replace(/'/g,"\'")+'><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
+                            html += '<tr id="invoice_row_'+tmp.id+'"><th scope="row"><i class="mdi mdi-close text-danger" style="cursor: pointer" onclick="Dashboard.deleteInvoice('+tmp.id+')"></i></th> <td class="cursor-pointer" onclick="Dashboard.editInvoice('+tmp.id+')"><input type="hidden" id="invoiceData_'+tmp.id+'" value='+"'"+JSON.stringify(tmp).replace(/'/g,"\'")+ "'" +'><input type="hidden" name="data[invoiceIds]['+tmp.id+']" value="'+tmp.id+'">'+tmp.invoice_no+'</td></tr>';
                         }
                         $('#invoice_nodata').remove();
                         $('#invoice_body').html('');
@@ -236,6 +246,10 @@ const Dashboard = {
     },
 
     saveCustomer : () => {
+        if ($('#title').val() === '') {
+            toastr.error('Please input title','Error!');
+            return;
+        }
         let data = $('#customer_form').serialize();
         let mode = $('#hid_mode').val();
         let url;

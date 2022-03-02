@@ -9,7 +9,7 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
-                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show');$('#customer_form')[0].reset();"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="Dashboard.addCustomer()"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_customers')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Customer</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_invoices')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export invoices</button>
                     <form action="{{url('/import_customers')}}" method="post" enctype="multipart/form-data" id="customer_csv_form">

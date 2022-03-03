@@ -24,7 +24,7 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            'email'=>'admin@gmail.com',
+            'email'=>'admin',
             'password'=>'123456',
             'created_at'=>date('Y-m-d H:i:s')
         ])

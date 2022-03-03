@@ -9,7 +9,7 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
-                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#userModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#userModal').modal('show');$('#user_name').removeAttr('readonly');"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="batchDelete('users')"><i class="mdi mdi-delete-restore menu-icon"></i>Batch</button>
                 </ul>
             </nav>
@@ -75,7 +75,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <form id="user_form">
-                                    <input type="text" class="form-control form-control-md" name="data[email]" id="user_name" placeholder="Please enter user name here.">
+                                    <input type="text" class="form-control form-control-md" name="data[email]" id="user_name" placeholder="Please enter user name here." readonly>
                                     <input type="text" class="form-control form-control-md" name="data[password]" id="user_password" placeholder="Please enter password here.">
                                     <input type="hidden" class="form-control form-control-md" name="id" id="user_id" value="0">
                                 </form>

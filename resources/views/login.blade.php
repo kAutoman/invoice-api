@@ -27,7 +27,7 @@
             <div class="row flex-grow">
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left p-5">
-                        <div class="brand-logo" onclick="Login.increaseLogo()">
+                        <div class="brand-logo">
                             <h1 id="logo">ADAM</h1>
                         </div>
                         <h4>Admin Sign In</h4>

@@ -32,6 +32,7 @@ const Users = {
         $('#user_name').val(decoded.email);
         $('#user_password').val(decoded.password);
         $('#hid_mode').val('edit');
+        $('#user_name').attr('readonly','readonly');
         $('#userModal').modal('show');
     },
     deleteItem : (id) => {

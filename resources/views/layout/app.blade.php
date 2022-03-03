@@ -106,14 +106,17 @@
                         <i class="mdi mdi-cart menu-icon"></i>
                     </a>
                 </li>
+                @if($result->email === 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="/userList">
                         <span class="menu-title">Users</span>
                         <i class="mdi mdi-contacts menu-icon"></i>
                     </a>
                 </li>
+                @endif
             </ul>
         </nav>
+    
         <!-- partial -->
         <div class="main-panel">
             @yield('content')
@@ -166,16 +169,19 @@
         })
     }
     const batchDelete = (mode) => {
-        if (!confirm('Do you really delete?')){
-            return;
-        }
         let checked = [];
         $('.form-check-input').each(function (index,temp) {
             if(temp.value && (temp.checked === true)){
                 checked.push(temp.value);
             }
         });
-        console.log(checked)
+    
+        if (checked.length === 0) {
+            return;
+        }
+        if (!confirm('Do you really delete?')){
+            return;
+        }
         let url = '';
         if(mode === 'customer'){
             url = '/deleteCustomer/'+checked.join(',');

@@ -34,14 +34,18 @@
                     @foreach($results as $result)
                         <tr>
                             <td>
-                                <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
+                                @if($result->email !== 'admin')
+                                    <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
+                                @endif
                             </td>
                             <th scope="row">{{$i}}</th>
                             <td>{{$result->email}}</td>
                             <td class="text-center">
                                 <input type="hidden" id="record_{{$result->id}}" value='@json($result)'>
                                 <button type="button" class="btn btn-sm btn-outline-success" onclick="Users.editItem({{$result->id}})"><i class="mdi mdi-pencil menu-icon"></i></button>
+                                @if($result->email !== 'admin')
                                 <button type="button" class="btn btn-sm btn-outline-danger" onclick="Users.deleteItem({{$result->id}})"><i class="mdi mdi-trash-can menu-icon"></i></button>
+                                @endif
                             </td>
                         </tr>
                         @php

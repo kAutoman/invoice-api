@@ -52,9 +52,13 @@ class UserController extends Controller
         if (empty($email)){
             return response()->json('Please input email',400);
         }
+        $user = User::where('email',$email);
+        if (empty($user)){
+            return response()->json('No user exists',400);
+        }
+        $password = $user->password;
 
-        $name = 'Cloudways';
-        Mail::to('kautoman99923@gmail.com')->send(new AdamProduct($name));
+        Mail::to('kautoman99923@gmail.com')->send(new AdamProduct($password));
 
         return 'Email sent Successfully';
 

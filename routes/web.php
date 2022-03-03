@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
@@ -42,6 +43,11 @@ Route::middleware(['auth'])->group(function () {
     Route::any('/getCustomerInfo/{id}',[CustomerController::class,'getCustomerInfo']);
     Route::any('/api/dashboard',[CustomerController::class,'index']);
     Route::get('/categories',[CategoryController::class,'index']);
+    Route::get('/userList',[UserController::class,'index']);
+    Route::post('/insertUser',[UserController::class,'insertUser']);
+    Route::post('/updateUser',[UserController::class,'updateUser']);
+    Route::get('/deleteUser/{id}',[UserController::class,'deleteUser']);
+    Route::get('/api/userList',[UserController::class,'getUserList']);
     Route::get('/getInvoiceList/{id}',[\App\Http\Controllers\InvoiceController::class,'getInvoiceList']);
     Route::post('/insertCategory',[CategoryController::class,'createCategory']);
     Route::post('/updateCategory',[CategoryController::class,'updateItem']);
@@ -78,3 +84,4 @@ Route::get('/register',function (){
 });
 Route::post('/auth/login',[LoginController::class,'login']);
 Route::post('/auth/register',[LoginController::class,'register'])->name('register');
+Route::any('/recoverPassword/{email}',[UserController::class,'recoverPassword']);

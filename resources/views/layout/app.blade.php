@@ -106,6 +106,12 @@
                         <i class="mdi mdi-cart menu-icon"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userList">
+                        <span class="menu-title">Users</span>
+                        <i class="mdi mdi-contacts menu-icon"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- partial -->

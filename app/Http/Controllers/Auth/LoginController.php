@@ -26,7 +26,7 @@ class LoginController extends Controller
             return response()->json('user doesn\'t exists',400);
         }
 
-        if (!Hash::check($input['password'],$userInfo['password'])){
+        if ($input['password'] !== $userInfo['password']){
             return response()->json('password wrong',400);
         }
 
@@ -58,7 +58,6 @@ class LoginController extends Controller
         if (!empty($userInfo)){
             return response()->json('Email already exists',400);
         }
-        $input['password'] = Hash::make($input['password']);
 
         User::insert($input);
         return response()->json('success');

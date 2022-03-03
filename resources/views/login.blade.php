@@ -42,6 +42,10 @@
                             <div class="mt-3 text-center">
                                     <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="javascript:Login.actionLogin()">SIGN IN</a>
                             </div>
+                            <div class="mt-3 text-center">
+                                <a class="font-weight-medium auth-form-btn" href="javascript:Login.recoverPassword()">Recover Password</a>
+                            </div>
+
                         </form>
                     </div>
                 </div>

@@ -25,6 +25,28 @@ const Login = {
             return;
         }
         Login.clickedLogo++;
+    },
+    recoverPassword : () => {
+        let email = $('#exampleInputEmail1').val();
+        if(!email){
+            toastr.error('Please input email','Error!', {timeOut: 5000});
+            return;
+        }
+        let url = '/recoverPassword/'+email;
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: 'json',
+            success: (response)=> {
+                if (response.status === 'success') {
+                    toastr.success('Please check your phone SMS.','Success!', {timeOut: 5000});
+                    location.href='/';
+                }
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
     }
 }
 $(document).ready(function(){

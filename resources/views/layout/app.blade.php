@@ -161,11 +161,46 @@
         });
     }
     const toggleCheckBox = (obj) => {
-
         $('.form-check-input').each(function (index,temp) {
-            $(temp).attr('checked',obj.checked)
+            $(temp).prop('checked',obj.checked)
         })
-
+    }
+    const batchDelete = (mode) => {
+        if (!confirm('Do you really delete?')){
+            return;
+        }
+        let checked = [];
+        $('.form-check-input').each(function (index,temp) {
+            if(temp.value && (temp.checked === true)){
+                checked.push(temp.value);
+            }
+        });
+        console.log(checked)
+        let url = '';
+        if(mode === 'customer'){
+            url = '/deleteCustomer/'+checked.join(',');
+        }
+        else if(mode === 'category'){
+            url = '/deleteCategory/'+checked.join(',');
+        }
+        else if(mode === 'parts'){
+            url = '/deleteParts/'+checked.join(',');
+        }
+        else if(mode === 'users'){
+            url = '/deleteUser/'+checked.join(',');
+        }
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: (response)=> {
+                if (response === 'success') {
+                    location.reload();
+                }
+            },
+            error : (error) => {
+                toastr.error(error.responseJSON,'Error!', {timeOut: 5000});
+            }
+        });
     }
 </script>
 @yield('script')

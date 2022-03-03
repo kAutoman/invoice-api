@@ -10,6 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#userModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="batchDelete('users')"><i class="mdi mdi-delete-restore menu-icon"></i>Batch</button>
                 </ul>
             </nav>
         </div>
@@ -17,6 +18,9 @@
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" onchange="toggleCheckBox(this)" aria-label="...">
+                    </th>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="text-center">Control</th>
@@ -29,6 +33,9 @@
                     @endphp
                     @foreach($results as $result)
                         <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
+                            </td>
                             <th scope="row">{{$i}}</th>
                             <td>{{$result->email}}</td>
                             <td class="text-center">

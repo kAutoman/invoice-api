@@ -90,8 +90,15 @@ class CustomerController extends Controller
 
     public function deleteCustomer($id)
     {
-        DB::table('invoice')->where('customer_id',$id)->delete();
-        DB::table('customers')->where('id',$id)->delete();
+        if (!is_string($id)){
+            DB::table('invoice')->where('customer_id',$id)->delete();
+            DB::table('customers')->where('id',$id)->delete();
+        }
+        else{
+            $id = explode(',',$id);
+            DB::table('invoice')->whereIn('customer_id',$id)->delete();
+            DB::table('customers')->whereIn('id',$id)->delete();
+        }
         return response()->json('success');
     }
 

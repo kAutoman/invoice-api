@@ -35,7 +35,13 @@ class UserController extends Controller
         if (empty($id)){
             return response()->json('no_id',400);
         }
-        User::find($id)->delete();
+        if (!is_string($id)) {
+            User::find($id)->delete();
+        }
+        else {
+            $id = explode(',',$id);
+            User::where('id',$id)->delete();
+        }
         return response()->json('success');
     }
 

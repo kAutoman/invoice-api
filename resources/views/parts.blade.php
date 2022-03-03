@@ -12,6 +12,7 @@
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_parts')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Parts</button>
                     <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Parts</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="batchDelete('parts')"><i class="mdi mdi-delete-restore menu-icon"></i>Batch</button>
                     <form action="{{url('/import_parts')}}" method="post" enctype="multipart/form-data" id="parts_form">
                         <input type="file" id="import_file_btn" name="file" hidden>
                     </form>
@@ -22,6 +23,9 @@
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" onchange="toggleCheckBox(this)" aria-label="...">
+                    </th>
                     <th scope="col">Q</th>
                     <th scope="col">MQ</th>
                     <th scope="col" class="text-center">Description</th>
@@ -36,6 +40,9 @@
                     @endphp
                     @foreach($results as $result)
                         <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
+                            </td>
                             <th scope="row">{{$result->q}}</th>
                             <td>{{$result->mq}}</td>
                             <td>{{$result->description}}</td>

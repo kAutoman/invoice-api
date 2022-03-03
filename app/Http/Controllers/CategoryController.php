@@ -35,7 +35,12 @@ class CategoryController extends Controller
         if (empty($id)){
             return response()->json('no_id',400);
         }
-        CategoriesModel::find($id)->delete();
+        if (!is_string($id)) {
+            CategoriesModel::find($id)->delete();
+        }else{
+            $id = explode(',',$id);
+            CategoriesModel::whereIn('id',$id)->delete();
+        }
         return response()->json('success');
     }
 

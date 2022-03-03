@@ -20,6 +20,7 @@
                     </form>
                     <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Customer</button>
                     <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_invoice_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Invoices</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="batchDelete('customer')"><i class="mdi mdi-delete-restore menu-icon"></i>Batch</button>
                 </ul>
             </nav>
         </div>
@@ -72,7 +73,7 @@
                         @foreach($results as $key=>$result)
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                    <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
                                 </td>
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$result->title}}</td>

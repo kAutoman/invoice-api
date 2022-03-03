@@ -50,7 +50,13 @@ class PartsController extends Controller
         if (empty($id)){
             return response()->json('no_id',400);
         }
-        PartsModel::find($id)->delete();
+        if (!is_string($id)) {
+            PartsModel::find($id)->delete();
+        }
+        else {
+            $id = explode(',',$id);
+            PartsModel::whereIn('id',$id)->delete();
+        }
         return response()->json('success');
     }
 

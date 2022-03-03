@@ -12,6 +12,7 @@
                     <button type="button" class="btn btn-sm btn-outline-behance" onclick="$('#hid_mode').val('add');$('#categoryModal').modal('show')"><i class="mdi mdi-plus menu-icon"></i>Add</button>
                     <button type="button" class="btn btn-sm btn-outline-success ml-2" onclick="location.href='{{url('/export_categories')}}'"><i class="mdi mdi-file-excel menu-icon"></i>Export Categories</button>
                     <button type="button" class="btn btn-sm btn-outline-info ml-2" onclick="$('#import_file_btn').click()"><i class="mdi mdi-database-import menu-icon"></i>import Categories</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="batchDelete('category')"><i class="mdi mdi-delete-restore menu-icon"></i>Batch</button>
                     <form action="{{url('/import_categories')}}" method="post" enctype="multipart/form-data" id="categories_form">
                         <input type="file" id="import_file_btn" name="file" hidden>
                     </form>
@@ -22,6 +23,9 @@
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" onchange="toggleCheckBox(this)" aria-label="...">
+                    </th>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="text-center">Control</th>
@@ -34,6 +38,9 @@
                     @endphp
                     @foreach($results as $result)
                         <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="{{$result->id}}" aria-label="...">
+                            </td>
                             <th scope="row">{{$i}}</th>
                             <td>{{$result->name}}</td>
                             <td class="text-center">
@@ -48,7 +55,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="3" class="text-center"> No Data</td>
+                        <td colspan="4" class="text-center"> No Data</td>
                     </tr>
                 @endif
                 </tbody>

@@ -160,6 +160,13 @@
             }
         });
     }
+    const toggleCheckBox = (obj) => {
+
+        $('.form-check-input').each(function (index,temp) {
+            $(temp).attr('checked',obj.checked)
+        })
+
+    }
 </script>
 @yield('script')
 <!-- End custom js for this page -->

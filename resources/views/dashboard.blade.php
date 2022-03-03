@@ -55,6 +55,9 @@
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" onchange="toggleCheckBox(this)" aria-label="...">
+                    </th>
                     <th scope="col">#</th>
                     <th scope="col">title</th>
                     <th scope="col">Email</th>
@@ -68,6 +71,9 @@
                     @if(count($results) > 0)
                         @foreach($results as $key=>$result)
                             <tr>
+                                <td>
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </td>
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$result->title}}</td>
                                 <td>{{$result->email}}</td>

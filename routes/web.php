@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PartsController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +12,7 @@ use App\Http\Controllers\FileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     if (empty(auth()->user())) {
@@ -39,42 +34,42 @@ Route::any('/auth/logout',function (){
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::any('/dashboard',[CustomerController::class,'index']);
-    Route::any('/getCustomerInfo/{id}',[CustomerController::class,'getCustomerInfo']);
-    Route::any('/api/dashboard',[CustomerController::class,'index']);
-    Route::get('/categories',[CategoryController::class,'index']);
-    Route::get('/userList',[UserController::class,'index']);
-    Route::post('/insertUser',[UserController::class,'insertUser']);
-    Route::post('/updateUser',[UserController::class,'updateUser']);
-    Route::get('/deleteUser/{id}',[UserController::class,'deleteUser']);
-    Route::get('/api/userList',[UserController::class,'getUserList']);
-    Route::get('/getInvoiceList/{id}',[\App\Http\Controllers\InvoiceController::class,'getInvoiceList']);
-    Route::post('/insertCategory',[CategoryController::class,'createCategory']);
-    Route::post('/updateCategory',[CategoryController::class,'updateItem']);
-    Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory']);
-    Route::get('/api/categoryList',[CategoryController::class,'getItemList']);
+    Route::any('/dashboard','\App\Http\Controllers\CustomerController@index');
+    Route::any('/getCustomerInfo/{id}','\App\Http\Controllers\CustomerController@getCustomerInfo');
+    Route::any('/api/dashboard','\App\Http\Controllers\CustomerController@index');
+    Route::get('/categories','\App\Http\Controllers\CategoryController@index');
+    Route::get('/userList','\App\Http\Controllers\UserController@index');
+    Route::post('/insertUser','\App\Http\Controllers\UserController@insertUser');
+    Route::post('/updateUser','\App\Http\Controllers\UserController@updateUser');
+    Route::get('/deleteUser/{id}','\App\Http\Controllers\UserController@deleteUser');
+    Route::get('/api/userList','\App\Http\Controllers\UserController@getUserList');
+    Route::get('/getInvoiceList/{id}','\App\Http\Controllers\InvoiceController@getInvoiceList');
+    Route::post('/insertCategory','\App\Http\Controllers\CategoryController@createCategory');
+    Route::post('/updateCategory','\App\Http\Controllers\CategoryController@updateItem');
+    Route::get('/deleteCategory/{id}','\App\Http\Controllers\CategoryController@deleteCategory');
+    Route::get('/api/categoryList','\App\Http\Controllers\CategoryController@getItemList');
 
-    Route::get('/parts/{type}/{is_shop}',[PartsController::class,'index']);
-    Route::post('/insertParts',[PartsController::class,'createPart']);
-    Route::post('/updateParts',[PartsController::class,'updatePart']);
-    Route::get('/deleteParts/{id}',[PartsController::class,'deletePart']);
-    Route::any('/customer/attach_file',[FileController::class,'uploadCustomerAttach']);
-    Route::get('/api/partsList/{type}/{is_shop}',[PartsController::class,'getItemList']);
+    Route::get('/parts/{type}/{is_shop}','\App\Http\Controllers\PartsController@index');
+    Route::post('/insertParts','\App\Http\Controllers\PartsController@createPart');
+    Route::post('/updateParts','\App\Http\Controllers\PartsController@updatePart');
+    Route::get('/deleteParts/{id}','\App\Http\Controllers\PartsController@deletePart');
+    Route::any('/customer/attach_file','\App\Http\Controllers\FileController@uploadCustomerAttach');
+    Route::get('/api/partsList/{type}/{is_shop}','\App\Http\Controllers\PartsController@getItemList');
 
-    Route::post('/insertInvoice',[\App\Http\Controllers\InvoiceController::class,'insertInvoice']);
-    Route::post('/insertCustomer',[\App\Http\Controllers\CustomerController::class,'insertCustomer']);
-    Route::post('/updateCustomer/{id}',[\App\Http\Controllers\CustomerController::class,'updateCustomer']);
-    Route::get('/deleteCustomer/{id}',[\App\Http\Controllers\CustomerController::class,'deleteCustomer']);
-    Route::get('/deleteInvoice/{id}',[\App\Http\Controllers\InvoiceController::class,'deleteInvoice']);
-    Route::get('/pdfInvoiceExport/{id}',[\App\Http\Controllers\InvoiceController::class,'pdfInvoiceExport']);
-    Route::get('/export_customers',[\App\Http\Controllers\CustomerController::class,'exportCustomers']);
-    Route::get('/export_categories',[\App\Http\Controllers\CategoryController::class,'exportCategories']);
-    Route::get('/export_invoices',[\App\Http\Controllers\CustomerController::class,'exportInvoices']);
-    Route::get('/export_parts',[\App\Http\Controllers\PartsController::class,'exportParts']);
-    Route::post('/import_customers',[\App\Http\Controllers\CustomerController::class,'importCustomers']);
-    Route::post('/import_invoices',[\App\Http\Controllers\CustomerController::class,'importInvoices']);
-    Route::post('/import_categories',[\App\Http\Controllers\CategoryController::class,'importCategories']);
-    Route::post('/import_parts',[\App\Http\Controllers\PartsController::class,'importParts']);
+    Route::post('/insertInvoice','\App\Http\Controllers\InvoiceController@insertInvoice');
+    Route::post('/insertCustomer','\App\Http\Controllers\CustomerController@insertCustomer');
+    Route::post('/updateCustomer/{id}','\App\Http\Controllers\CustomerController@updateCustomer');
+    Route::get('/deleteCustomer/{id}','\App\Http\Controllers\CustomerController@deleteCustomer');
+    Route::get('/deleteInvoice/{id}','\App\Http\Controllers\InvoiceController@deleteInvoice');
+    Route::get('/pdfInvoiceExport/{id}','\App\Http\Controllers\InvoiceController@pdfInvoiceExport');
+    Route::get('/export_customers','\App\Http\Controllers\CustomerController@exportCustomers');
+    Route::get('/export_categories','\App\Http\Controllers\CategoryController@exportCategories');
+    Route::get('/export_invoices','\App\Http\Controllers\CustomerController@exportInvoices');
+    Route::get('/export_parts','\App\Http\Controllers\PartsController@exportParts');
+    Route::post('/import_customers','\App\Http\Controllers\CustomerController@importCustomers');
+    Route::post('/import_invoices','\App\Http\Controllers\CustomerController@importInvoices');
+    Route::post('/import_categories','\App\Http\Controllers\CategoryController@importCategories');
+    Route::post('/import_parts','\App\Http\Controllers\PartsController@importParts');
 
 });
 
@@ -82,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/register',function (){
     return view('register');
 });
-Route::post('/auth/login',[LoginController::class,'login']);
-Route::post('/auth/register',[LoginController::class,'register'])->name('register');
-Route::any('/recoverPassword/{email}',[UserController::class,'recoverPassword']);
+Route::post('/auth/login','Auth\LoginController@login');
+Route::post('/auth/register','\App\Http\Controllers\Auth\LoginController@register')->name('register');
+Route::any('/recoverPassword/{email}','\App\Http\Controllers\UserController@recoverPassword');
+

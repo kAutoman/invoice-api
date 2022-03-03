@@ -106,7 +106,7 @@
                         <i class="mdi mdi-cart menu-icon"></i>
                     </a>
                 </li>
-                @if($result->email === 'admin')
+                @if(auth()->user()->email === 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="/userList">
                         <span class="menu-title">Users</span>
